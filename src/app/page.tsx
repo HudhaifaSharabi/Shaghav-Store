@@ -48,6 +48,8 @@ export default function Home() {
 
   const { contextSafe } = useGSAP(
     () => {
+      if (!logoRef.current || !containerRef.current) return;
+
       // Initial mount animation (Timeline for sequential slow fade-up)
       const tl = gsap.timeline();
 
@@ -55,28 +57,37 @@ export default function Home() {
         logoRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }
-      )
-        .fromTo(
+      );
+
+      if (subtitleRef.current) {
+        tl.fromTo(
           subtitleRef.current,
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
           "-=1.0"
-        )
-        .fromTo(
+        );
+      }
+
+      if (inviteFormRef.current) {
+        tl.fromTo(
           inviteFormRef.current,
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
           "-=1.0"
         );
+      }
         
       // Ensure other forms are hidden initially
-      gsap.set([waitlistFormRef.current, successMsgRef.current], { 
-        autoAlpha: 0, 
-        display: "none",
-        x: 30 
-      });
+      const hiddenTargets = [waitlistFormRef.current, successMsgRef.current].filter(Boolean);
+      if (hiddenTargets.length > 0) {
+        gsap.set(hiddenTargets, { 
+          autoAlpha: 0, 
+          display: "none",
+          x: 30 
+        });
+      }
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [mounted] }
   );
 
   // Safe transition function for GSAP 
@@ -257,7 +268,7 @@ export default function Home() {
                     handleAccess();
                   }
                 }}
-                placeholder="أدخل رمز الاستحقاق.."
+                placeholder="أدخل رمز الدعوة.."
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 className={`w-full bg-transparent py-3 text-center font-montserrat text-base tracking-widest text-white outline-none border-b drop-shadow-sm transition-colors duration-500 placeholder:text-white/30 ${

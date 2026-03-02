@@ -357,18 +357,18 @@ export default function Lobby() {
           </div>
 
           <div className="relative z-20 flex flex-col items-center text-center gap-7 mt-[30%] px-4" dir="rtl">
-            <span ref={addToTextRefs as any} className="font-shaghafArabic font-extralight text-xs tracking-widest text-SHAGHAV-gold border border-SHAGHAV-gold/40 px-6 py-2 backdrop-blur-sm drop-shadow-md">
+            <span ref={addToTextRefs as any} className="font-SHAGHAVArabic font-extralight text-xs tracking-widest text-SHAGHAV-gold border border-SHAGHAV-gold/40 px-6 py-2 backdrop-blur-sm drop-shadow-md">
               قطعة واحدة فقط
             </span>
             <h1 ref={addToTextRefs as any} className="font-cormorant text-5xl md:text-7xl font-medium text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] tracking-[0.05em]">
               فستان ما في منه اثنين
             </h1>
-            <p ref={addToTextRefs as any} className="font-shaghafArabic font-extralight text-sm tracking-widest text-[#C87D8A] max-w-sm drop-shadow-md leading-relaxed">
+            <p ref={addToTextRefs as any} className="font-SHAGHAVArabic font-extralight text-sm tracking-widest text-[#C87D8A] max-w-sm drop-shadow-md leading-relaxed">
               صممناه مرة واحدة، ومستحيل وحدة ثانية تلبس زيه. احجزيه قبل ما يروح عليكِ.
             </p>
             <Link href="/products?filter=1-of-1" ref={addToTextRefs as any} className="group relative flex items-center justify-center px-10 py-4 mt-8 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-300 hover:border-[#D4AF37] animate-[pulse_1.5s_ease-in-out_infinite] w-fit">
               <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-              <span className="relative z-10 font-shaghafArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> احجزي هذه القطعة </span>
+              <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> احجزي هذه القطعة </span>
             </Link>
           </div>
 
@@ -376,7 +376,7 @@ export default function Lobby() {
 
         {/* Scroll Indicator */}
          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30 opacity-60">
-          <span className="font-shaghafArabic font-extralight text-[9px] tracking-[0.2em] text-white">اسحبي للأسفل</span>
+          <span className="font-SHAGHAVArabic font-extralight text-[9px] tracking-[0.2em] text-white">اسحبي للأسفل</span>
           <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
             <div ref={scrollLineRef} className="w-full h-full bg-SHAGHAV-gold absolute top-0 left-0" />
           </div>
@@ -419,12 +419,12 @@ export default function Lobby() {
             </div>
             <div className="mt-12 max-w-xs ml-auto relative z-20">
               <h3 ref={addToTextRefs as any} className="font-cormorant text-4xl text-SHAGHAV-gold drop-shadow-md tracking-wider mb-4">إطلالة تسحر العيون</h3>
-              <p ref={addToTextRefs as any} className="font-shaghafArabic font-extralight text-sm tracking-widest text-[#C87D8A] leading-loose">
+              <p ref={addToTextRefs as any} className="font-SHAGHAVArabic font-extralight text-sm tracking-widest text-[#C87D8A] leading-loose">
                 فساتين مصممة عشان تكوني أجمل وحدة في المكان، وتعبر عن ذوقك الراقي.
               </p>
               <Link href="/products?filter=dresses" ref={addToTextRefs as any} className="group relative flex items-center justify-center px-10 py-4 mt-8 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-500 hover:border-[#D4AF37] animate-[pulse_3s_ease-in-out_infinite] w-fit">
                 <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-                <span className="relative z-10 font-shaghafArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest"> شوفي الفساتين </span>
+                <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest"> شوفي الفساتين </span>
               </Link>
             </div>
           </div>
@@ -547,13 +547,13 @@ export default function Lobby() {
           <h2 ref={addToTextRefs as any} className="font-cormorant font-medium text-6xl md:text-8xl lg:text-9xl text-SHAGHAV-gold drop-shadow-[0_4px_30px_rgba(212,175,55,0.4)] mb-8 tracking-[0.05em] py-2">
             نعومة الحرير
           </h2>
-          <p ref={addToTextRefs as any} className="font-shaghafArabic font-extralight text-sm md:text-lg text-white/90 tracking-[0.15em] mb-12 max-w-lg mx-auto drop-shadow-md leading-loose pointer-events-auto relative z-10">
+          <p ref={addToTextRefs as any} className="font-SHAGHAVArabic font-extralight text-sm md:text-lg text-white/90 tracking-[0.15em] mb-12 max-w-lg mx-auto drop-shadow-md leading-loose pointer-events-auto relative z-10">
             لأنك تستاهلي تدلعي نفسك وترتاحي.. <br/>وفرنا لك ملابس نوم راقية ومريحة جداً.
           </p>
           <div className="pointer-events-auto relative z-10 mt-4">
             <Link href="/products?filter=sleepwear" ref={addToTextRefs as any} className="group relative flex items-center justify-center px-12 py-5 bg-transparent border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.1)] cursor-pointer transition-all duration-500 hover:border-[#D4AF37] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] w-fit rounded-none backdrop-blur-sm mx-auto">
               <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-              <span className="relative z-10 font-shaghafArabic font-light tracking-[0.2em] text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm uppercase"> شوفي ملابس النوم </span>
+              <span className="relative z-10 font-SHAGHAVArabic font-light tracking-[0.2em] text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm uppercase"> شوفي ملابس النوم </span>
             </Link>
           </div>
 
@@ -591,13 +591,13 @@ export default function Lobby() {
             <h2 className="font-cormorant text-5xl md:text-7xl lg:text-8xl text-white/90 mb-8 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] s4-reveal tracking-wider">
               تفاصيلك الخاصة
             </h2>
-            <p className="font-shaghafArabic font-extralight text-base md:text-lg text-[#C87D8A] tracking-[0.15em] leading-[2.2] max-w-sm ml-auto mr-auto md:mr-0 s4-reveal drop-shadow-md">
+            <p className="font-SHAGHAVArabic font-extralight text-base md:text-lg text-[#C87D8A] tracking-[0.15em] leading-[2.2] max-w-sm ml-auto mr-auto md:mr-0 s4-reveal drop-shadow-md">
               تصاميم ناعمة تزيدك أنوثة وثقة، صممناها بعناية لتناسب أجمل لحظاتك الخاصة.
             </p>
             <div className="mt-12 s4-reveal flex justify-center md:justify-start">
               <Link href="/products?filter=lingerie" className="group relative flex items-center justify-center px-10 py-4 mt-8 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-300 hover:border-[#D4AF37] animate-[pulse_1.5s_ease-in-out_infinite] w-fit">
                 <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-                <span className="relative z-10 font-shaghafArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> اكتشفي المزيد </span>
+                <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> اكتشفي المزيد </span>
               </Link>
             </div>
           </div>
@@ -617,7 +617,7 @@ export default function Lobby() {
         
         <div className="relative z-10 flex flex-col items-center max-w-[800px] mx-auto gap-10">
           
-          <span className="font-shaghafArabic font-light text-xs tracking-[0.4em] text-[#C87D8A] s5-reveal uppercase">
+          <span className="font-SHAGHAVArabic font-light text-xs tracking-[0.4em] text-[#C87D8A] s5-reveal uppercase">
             التفصيل حسب الطلب
           </span>
           
@@ -625,13 +625,13 @@ export default function Lobby() {
             لأنكِ مميزة وما تشبهي أحد..<br/>دعينا نفصل لكِ فستان على ذوقكِ.
           </h2>
 
-          <p className="font-shaghafArabic font-light text-sm md:text-base text-white/50 tracking-[0.1em] leading-[2.2] max-w-md s5-reveal">
+          <p className="font-SHAGHAVArabic font-light text-sm md:text-base text-white/50 tracking-[0.1em] leading-[2.2] max-w-md s5-reveal">
             كل خيطة بها قصة، وكل قصة تبدأ بكِ أنتِ.
           </p>
 
           <Link href="/products?filter=bespoke" className="s5-reveal group relative flex items-center justify-center px-12 py-4 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-300 hover:border-[#D4AF37] animate-[pulse_1.5s_ease-in-out_infinite] w-fit">
             <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-            <span className="relative z-10 font-shaghafArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> تواصلي معنا للتفصيل </span>
+            <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-300 text-sm tracking-widest"> تواصلي معنا للتفصيل </span>
           </Link>
 
         </div>

@@ -17,7 +17,7 @@ function CartBadge() {
 
   return (
     <span className="absolute -top-2 -right-2 min-w-[16px] h-4 px-1 bg-[#D4AF37] rounded-full ring-2 ring-[#0A0A0A] flex items-center justify-center">
-      <span className="font-shaghafArabic text-[9px] font-bold text-black leading-none">
+      <span className="font-SHAGHAVArabic text-[9px] font-bold text-black leading-none">
         {count.toLocaleString("ar-SA")}
       </span>
     </span>
@@ -47,7 +47,7 @@ export default function ProductsLayout({
           </button>
           <Link
             href="/lobby"
-            className="hidden sm:block font-shaghafArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/40 hover:text-[#D4AF37]/80 transition-colors duration-500"
+            className="hidden sm:block font-SHAGHAVArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/40 hover:text-[#D4AF37]/80 transition-colors duration-500"
           >
             المعرض
           </Link>
@@ -58,7 +58,7 @@ export default function ProductsLayout({
           href="/products"
           className="font-cormorant font-semibold text-xl tracking-[0.35em] text-[#D4AF37] hover:text-white transition-colors duration-500 select-none"
         >
-          SHAGHAF
+          SHAGHAV
         </Link>
 
         {/* Right: Shopping Bag — opens CartDrawer */}
@@ -99,7 +99,7 @@ export default function ProductsLayout({
           href="/lobby"
           className="inline-block font-cormorant font-semibold text-2xl tracking-[0.4em] text-[#D4AF37]/80 hover:text-[#D4AF37] transition-colors duration-500 mb-10"
         >
-          SHAGHAF
+          SHAGHAV
         </Link>
 
         {/* Decorative divider */}
@@ -119,7 +119,7 @@ export default function ProductsLayout({
             <Link
               key={label}
               href={href}
-              className="font-shaghafArabic text-[11px] tracking-[0.2em] text-[#C87D8A]/60 hover:text-[#C87D8A] transition-colors duration-500"
+              className="font-SHAGHAVArabic text-[11px] tracking-[0.2em] text-[#C87D8A]/60 hover:text-[#C87D8A] transition-colors duration-500"
             >
               {label}
             </Link>
@@ -127,7 +127,7 @@ export default function ProductsLayout({
         </nav>
 
         {/* Copyright */}
-        <p className="font-shaghafArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/30">
+        <p className="font-SHAGHAVArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/30">
           شغف — جميع الحقوق محفوظة ٢٠٢٦
         </p>
       </footer>

@@ -65,11 +65,11 @@ export default function WelcomeLetter({ onComplete }: WelcomeLetterProps) {
           أنتِ لستِ هُنا صُدفة.
         </h2>
         
-        <p ref={addToTextRefs as any} className="relative z-10 font-shaghafArabic text-white/80 font-light text-sm md:text-base leading-[2.2] max-w-lg text-center mb-12 drop-shadow-md">
+        <p ref={addToTextRefs as any} className="relative z-10 font-SHAGHAVArabic text-white/80 font-light text-sm md:text-base leading-[2.2] max-w-lg text-center mb-12 drop-shadow-md">
           خلف هذه البوابات، لا توجد أزياء للعامة. لقد وُجد 'شغف' ليُعانق تمردكِ الهادئ، وليُترجم 'الأنا' العميقة بداخلكِ إلى تُحفٍ من الحرير والمخمل. هُنا.. أنتِ لا تختارين القِطع، بل هي التي تتعرّفُ عليكِ.
         </p>
         
-        <span ref={addToTextRefs as any} className="relative z-10 font-shaghafArabic text-white/50 text-xs md:text-sm tracking-[0.2em] mb-12">
+        <span ref={addToTextRefs as any} className="relative z-10 font-SHAGHAVArabic text-white/50 text-xs md:text-sm tracking-[0.2em] mb-12">
           بشغف.. لكِ وحدكِ.
         </span>
         
@@ -79,7 +79,7 @@ export default function WelcomeLetter({ onComplete }: WelcomeLetterProps) {
           className="relative z-10 group flex items-center justify-center px-12 py-5 bg-[#4B1E28]/60 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_20px_rgba(75,30,40,0.6)] cursor-pointer transition-all duration-700 hover:border-[#D4AF37] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] w-full md:w-auto"
         >
           <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-in-out" />
-          <span className="relative z-20 font-shaghafArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-700 text-sm md:text-base tracking-[0.1em] uppercase">
+          <span className="relative z-20 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-700 text-sm md:text-base tracking-[0.1em] uppercase">
             دعينا نُتوّج حُضوركِ
           </span>
         </button>
