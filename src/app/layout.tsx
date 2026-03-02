@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
+import Gatekeeper from "@/components/layout/Gatekeeper";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -26,8 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${cormorant.variable} ${montserrat.variable}`}>
-      <body className="antialiased font-montserrat bg-SHAGHAV-black text-[#F5F5F5]">
-        {children}
+       <body className="antialiased font-montserrat bg-SHAGHAV-black text-[#F5F5F5]">
+        <Gatekeeper>
+          {children}
+        </Gatekeeper>
       </body>
     </html>
   );

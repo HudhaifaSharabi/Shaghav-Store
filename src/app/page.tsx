@@ -232,7 +232,7 @@ export default function Home() {
             alt="SHAGHAV Logo"
             width={160}
             height={160}
-            className="mb-6 h-20 w-auto object-contain md:h-40 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+            className="mb-6 h-40 w-auto object-contain md:h-40 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
           />
           <h1 className="font-cormorant text-5xl font-semibold uppercase tracking-[0.2em] text-SHAGHAV-gold md:text-6xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
             SHAGHAV
