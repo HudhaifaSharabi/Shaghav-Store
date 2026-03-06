@@ -80,7 +80,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
           </div>
           <div className="flex items-center gap-4">
             {cart.length > 0 && (
-              <span className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-white/25">
+              <span className="font-arabic text-[10px] tracking-[0.2em] text-white/25">
                 {cart.length} {cart.length === 1 ? "قطعة" : "قطع"}
               </span>
             )}
@@ -107,14 +107,14 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                 <p className="font-cormorant text-xl text-white/30 tracking-wide mb-2">
                   حقيبتك فارغة حالياً
                 </p>
-                <p className="font-SHAGHAVArabic text-[11px] text-white/15 tracking-[0.2em]">
+                <p className="font-arabic text-[11px] text-white/15 tracking-[0.2em]">
                   لم تُضاف أي قطعة بعد
                 </p>
               </div>
               <Link
                 href="/products"
                 onClick={onClose}
-                className="font-SHAGHAVArabic text-[11px] tracking-[0.25em] text-[#D4AF37]/50 border border-[#D4AF37]/25 px-6 py-3 hover:border-[#D4AF37]/60 hover:text-[#D4AF37]/80 transition-all duration-500"
+                className="font-arabic text-[11px] tracking-[0.25em] text-[#D4AF37]/50 border border-[#D4AF37]/25 px-6 py-3 hover:border-[#D4AF37]/60 hover:text-[#D4AF37]/80 transition-all duration-500"
               >
                 اكتشفي المتجر
               </Link>
@@ -134,7 +134,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       {isOneOfOne && (
                         <div className="absolute bottom-0 left-0 right-0 bg-[#4B1E28]/80 py-0.5 text-center">
-                          <span className="font-SHAGHAVArabic text-[8px] tracking-[0.15em] text-[#D4AF37]/80">١/١</span>
+                          <span className="font-arabic text-[8px] tracking-[0.15em] text-[#D4AF37]/80">١/١</span>
                         </div>
                       )}
                     </div>
@@ -144,13 +144,13 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       <h3 className="font-cormorant text-base text-white/85 leading-snug mb-1 tracking-wide">
                         {item.title}
                       </h3>
-                      <p className="font-SHAGHAVArabic text-[11px] text-[#C87D8A]/60 tracking-[0.05em] mb-3">
+                      <p className="font-arabic text-[11px] text-[#C87D8A]/60 tracking-[0.05em] mb-3">
                         اللون: {item.color} · المقاس: {item.size}
                       </p>
                       <span className="font-cormorant text-base text-[#D4AF37] tracking-wide mb-3">
                         {item.price}
                         {item.quantity > 1 && (
-                          <span className="font-SHAGHAVArabic text-[10px] text-white/25 mr-2">× {item.quantity}</span>
+                          <span className="font-arabic text-[10px] text-white/25 mr-2">× {item.quantity}</span>
                         )}
                       </span>
 
@@ -159,7 +159,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                         {/* Remove */}
                         <button
                           onClick={() => removeFromCart(item.cartId)}
-                          className="font-SHAGHAVArabic text-[11px] tracking-[0.1em] text-[#C87D8A]/40 hover:text-[#C87D8A] transition-colors duration-300"
+                          className="font-arabic text-[11px] tracking-[0.1em] text-[#C87D8A]/40 hover:text-[#C87D8A] transition-colors duration-300"
                         >
                           إلغاء
                         </button>
@@ -189,7 +189,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                             </button>
                           </div>
                           {isOneOfOne && (
-                            <span className="font-SHAGHAVArabic text-[9px] tracking-[0.12em] text-[#D4AF37]/50">
+                            <span className="font-arabic text-[9px] tracking-[0.12em] text-[#D4AF37]/50">
                               قطعة فريدة لا تتكرر
                             </span>
                           )}
@@ -207,9 +207,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         {cart.length > 0 && (
           <div className="relative z-10 mt-auto border-t border-[#4B1E28]/60 p-6 bg-[#0A0A0A]">
             <div className="flex items-center justify-between mb-2">
-              <span className="font-SHAGHAVArabic text-[10px] tracking-[0.15em] text-white/20">شامل الضريبة</span>
+              <span className="font-arabic text-[10px] tracking-[0.15em] text-white/20">شامل الضريبة</span>
               <div className="flex items-center gap-3">
-                <span className="font-SHAGHAVArabic text-[11px] tracking-[0.15em] text-white/35">المجموع الإجمالي</span>
+                <span className="font-arabic text-[11px] tracking-[0.15em] text-white/35">المجموع الإجمالي</span>
                 <span className="font-cormorant text-xl text-[#D4AF37] tracking-wide">{formatPrice(subtotal)}</span>
               </div>
             </div>
@@ -222,12 +222,12 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               className="group relative flex items-center justify-center px-10 py-4 w-full bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-500 hover:border-[#D4AF37] animate-[pulse_3s_ease-in-out_infinite]"
             >
               <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-              <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
+              <span className="relative z-10 font-arabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
                 إتـمـام الـطـلـب
               </span>
             </Link>
 
-            <p className="text-center font-SHAGHAVArabic text-[9px] tracking-[0.2em] text-white/15 mt-4">
+            <p className="text-center font-arabic text-[9px] tracking-[0.2em] text-white/15 mt-4">
               دفع آمن · تشفير كامل · استرجاع ٧ أيام
             </p>
           </div>

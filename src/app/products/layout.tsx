@@ -17,7 +17,7 @@ function CartBadge() {
 
   return (
     <span className="absolute -top-2 -right-2 min-w-[16px] h-4 px-1 bg-[#D4AF37] rounded-full ring-2 ring-[#0A0A0A] flex items-center justify-center">
-      <span className="font-SHAGHAVArabic text-[9px] font-bold text-black leading-none">
+      <span className="font-arabic text-[9px] font-bold text-black leading-none">
         {count.toLocaleString("ar-SA")}
       </span>
     </span>
@@ -42,7 +42,7 @@ export default function ProductsLayout({
           href="/"
           className="inline-block font-cormorant font-semibold text-2xl tracking-[0.4em] text-[#D4AF37]/80 hover:text-[#D4AF37] transition-colors duration-500 mb-10"
         >
-          SHAGHAV
+          ANALIA
         </Link>
 
         {/* Decorative divider */}
@@ -62,7 +62,7 @@ export default function ProductsLayout({
             <Link
               key={label}
               href={href}
-              className="font-SHAGHAVArabic text-[11px] tracking-[0.2em] text-[#C87D8A]/60 hover:text-[#C87D8A] transition-colors duration-500"
+              className="font-arabic text-[11px] tracking-[0.2em] text-[#C87D8A]/60 hover:text-[#C87D8A] transition-colors duration-500"
             >
               {label}
             </Link>
@@ -70,7 +70,7 @@ export default function ProductsLayout({
         </nav>
 
         {/* Copyright */}
-        <p className="font-SHAGHAVArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/30">
+        <p className="font-arabic text-[10px] tracking-[0.25em] text-[#D4AF37]/30">
           شغف — جميع الحقوق محفوظة ٢٠٢٦
         </p>
       </footer>

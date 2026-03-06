@@ -79,7 +79,7 @@ export default function CollectionPage() {
       
       {/* ── Hero Section ── */}
       <section className="h-[40vh] md:h-[50vh] flex flex-col items-center justify-center text-center relative bg-gradient-to-b from-[#0A0A0A] to-[#4B1E28]/20 px-6">
-        <h1 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-bold drop-shadow-2xl mb-6">
+        <h1 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-normal drop-shadow-2xl mb-6">
           {categoryInfo.title}
         </h1>
         <p className="font-arabic text-[#C87D8A] text-base md:text-xl max-w-2xl leading-relaxed opacity-80">
@@ -132,17 +132,17 @@ export default function CollectionPage() {
                   
                   {/* Quick Add Overlay (Subtle) */}
                   <div className="absolute bottom-0 inset-x-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-black/40 backdrop-blur-sm border-t border-white/10 flex justify-center">
-                    <span className="font-feminine text-[10px] text-[#D4AF37] tracking-[0.3em] uppercase">عرض المقتنية</span>
+                    <span className="font-arabic text-[10px] text-[#D4AF37] tracking-[0.3em] uppercase">عرض المقتنية</span>
                   </div>
                 </div>
                 
                 <div className="mt-8 text-center md:text-right px-2">
-                  <h3 className="font-arabic text-[#D4AF37] text-xl md:text-2xl font-medium group-hover:tracking-wider transition-all duration-500">
+                  <h3 className="font-arabic text-[#D4AF37] text-xl md:text-2xl font-normal group-hover:tracking-wider transition-all duration-500">
                     {product.title}
                   </h3>
                   <div className="flex items-center justify-center md:justify-start gap-4 mt-3">
                     <div className="h-px w-8 bg-[#4B1E28]/40" />
-                    <span className="font-feminine text-white/50 text-sm tracking-widest">{product.price}</span>
+                    <span className="font-arabic text-white/50 text-sm tracking-widest">{product.price}</span>
                   </div>
                 </div>
               </Link>

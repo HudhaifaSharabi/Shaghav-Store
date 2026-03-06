@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const DEFAULT_METADATA = {
   colors: [
-    { name: "عنابي ملكي",  hex: "#4B1E28", image: "/images/shaghaf_masterpiece_1772392229139.png" },
+    { name: "عنابي ملكي",  hex: "#4B1E28", image: "/images/ANALIA_masterpiece_1772392229139.png" },
     { name: "أسود أونيكس", hex: "#1a1a1a", image: "/images/couture_one_1772392258498.png" },
   ],
   sizes: ["XS", "S", "M", "L", "XL"],
@@ -82,7 +82,7 @@ function AccordionItem({ title, content }: { title: string; content: string }) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between py-5 text-right group"
       >
-        <span className="font-SHAGHAVArabic text-sm tracking-[0.12em] text-white/70 group-hover:text-white transition-colors duration-300">
+        <span className="font-arabic text-sm tracking-[0.12em] text-white/70 group-hover:text-white transition-colors duration-300">
           {title}
         </span>
         <ChevronDown
@@ -92,7 +92,7 @@ function AccordionItem({ title, content }: { title: string; content: string }) {
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${open ? "max-h-48 pb-5" : "max-h-0"}`}
       >
-        <p className="font-SHAGHAVArabic font-light text-sm text-white/40 leading-loose tracking-[0.1em]">
+        <p className="font-arabic font-light text-sm text-white/40 leading-loose tracking-[0.1em]">
           {content}
         </p>
       </div>
@@ -139,11 +139,11 @@ function ReviewsSection() {
 
         {/* Left: title + big rating */}
         <div className="flex-shrink-0">
-          <span className="block font-SHAGHAVArabic text-[9px] tracking-[0.4em] text-[#C87D8A]/50 mb-3">تقييمات العملاء</span>
+          <span className="block font-arabic text-[9px] tracking-[0.4em] text-[#C87D8A]/50 mb-3">تقييمات العملاء</span>
           <h2 className="font-cormorant font-semibold text-3xl text-white/80 tracking-wide mb-4">آراء النخبة</h2>
           <div className="flex items-baseline gap-2 mb-2">
             <span className="font-cormorant text-6xl text-[#D4AF37]">{avgRating.toFixed(1)}</span>
-            <span className="font-SHAGHAVArabic text-[11px] tracking-[0.2em] text-white/30">/ ٥ · {reviews.length} تقييم</span>
+            <span className="font-arabic text-[11px] tracking-[0.2em] text-white/30">/ ٥ · {reviews.length} تقييم</span>
           </div>
           <StarRow rating={Math.round(avgRating)} />
         </div>
@@ -152,7 +152,7 @@ function ReviewsSection() {
         <div className="flex-1 flex flex-col gap-2 justify-center">
           {ratingCounts.map(({ n, count }) => (
             <div key={n} className="flex items-center gap-3">
-              <span className="font-SHAGHAVArabic text-[10px] tracking-wide text-white/30 w-4 text-center">{n}</span>
+              <span className="font-arabic text-[10px] tracking-wide text-white/30 w-4 text-center">{n}</span>
               <span className="text-[#D4AF37]/60 text-[10px]">✦</span>
               <div className="flex-1 h-1 bg-white/[0.06] relative">
                 <div
@@ -160,7 +160,7 @@ function ReviewsSection() {
                   style={{ width: reviews.length ? `${(count / reviews.length) * 100}%` : "0%" }}
                 />
               </div>
-              <span className="font-SHAGHAVArabic text-[10px] text-white/20 w-4 text-center">{count}</span>
+              <span className="font-arabic text-[10px] text-white/20 w-4 text-center">{count}</span>
             </div>
           ))}
         </div>
@@ -169,7 +169,7 @@ function ReviewsSection() {
         <div className="flex-shrink-0 self-start">
           <button
             onClick={() => setShowForm(!showForm)}
-            className="font-SHAGHAVArabic text-[11px] tracking-[0.2em] text-[#D4AF37]/70 border border-[#D4AF37]/30 px-6 py-3 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300"
+            className="font-arabic text-[11px] tracking-[0.2em] text-[#D4AF37]/70 border border-[#D4AF37]/30 px-6 py-3 hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300"
           >
             {showForm ? "إلغاء" : "+ أضيفي رأيك"}
           </button>
@@ -200,18 +200,18 @@ function ReviewsSection() {
             value={newReview.author}
             onChange={(e) => setNewReview((r) => ({ ...r, author: e.target.value }))}
             placeholder="اسمك (اختياري)"
-            className="w-full bg-transparent border-b border-white/[0.1] focus:border-[#D4AF37]/50 text-white/60 font-SHAGHAVArabic text-sm py-2.5 mb-4 outline-none placeholder-white/20 tracking-[0.1em] transition-colors duration-300"
+            className="w-full bg-transparent border-b border-white/[0.1] focus:border-[#D4AF37]/50 text-white/60 font-arabic text-sm py-2.5 mb-4 outline-none placeholder-white/20 tracking-[0.1em] transition-colors duration-300"
           />
           <textarea
             value={newReview.text}
             onChange={(e) => setNewReview((r) => ({ ...r, text: e.target.value }))}
             placeholder="اكتبي رأيك بالقطعة..."
             rows={3}
-            className="w-full bg-transparent border-b border-white/[0.1] focus:border-[#D4AF37]/50 text-white/60 font-SHAGHAVArabic text-sm py-2.5 mb-6 outline-none placeholder-white/20 tracking-[0.1em] resize-none transition-colors duration-300"
+            className="w-full bg-transparent border-b border-white/[0.1] focus:border-[#D4AF37]/50 text-white/60 font-arabic text-sm py-2.5 mb-6 outline-none placeholder-white/20 tracking-[0.1em] resize-none transition-colors duration-300"
           />
           <button
             onClick={submitReview}
-            className="font-SHAGHAVArabic text-sm tracking-widest text-black bg-[#D4AF37] px-8 py-3 hover:bg-[#E5C158] transition-colors duration-300"
+            className="font-arabic text-sm tracking-widest text-black bg-[#D4AF37] px-8 py-3 hover:bg-[#E5C158] transition-colors duration-300"
           >
             نشر الرأي
           </button>
@@ -230,7 +230,7 @@ function ReviewsSection() {
               <div className="relative aspect-[16/7] overflow-hidden">
                 <img src={review.image} alt="صورة العميلة" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <span className="absolute bottom-3 right-4 font-SHAGHAVArabic text-[9px] tracking-[0.2em] text-white/50">
+                <span className="absolute bottom-3 right-4 font-arabic text-[9px] tracking-[0.2em] text-white/50">
                   صورة العميلة بعد الاستلام
                 </span>
               </div>
@@ -240,11 +240,11 @@ function ReviewsSection() {
               {/* Rating row */}
               <div className="flex items-center justify-between mb-4">
                 <StarRow rating={review.rating} small />
-                <span className="font-SHAGHAVArabic text-[9px] tracking-[0.15em] text-white/20">{review.date}</span>
+                <span className="font-arabic text-[9px] tracking-[0.15em] text-white/20">{review.date}</span>
               </div>
 
               {/* Quote */}
-              <p className="font-SHAGHAVArabic font-light text-sm text-white/55 leading-loose tracking-[0.08em] mb-5">
+              <p className="font-arabic font-light text-sm text-white/55 leading-loose tracking-[0.08em] mb-5">
                 {review.text}
               </p>
 
@@ -256,8 +256,8 @@ function ReviewsSection() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-SHAGHAVArabic text-[11px] tracking-[0.15em] text-white/50">{review.author}</p>
-                  <p className="font-SHAGHAVArabic text-[9px] tracking-[0.1em] text-white/20">
+                  <p className="font-arabic text-[11px] tracking-[0.15em] text-white/50">{review.author}</p>
+                  <p className="font-arabic text-[9px] tracking-[0.1em] text-white/20">
                     {review.location} · {review.verified ? "عميلة موثّقة ✓" : "عميلة جديدة"}
                   </p>
                 </div>
@@ -432,7 +432,7 @@ export default function ProductDetailPage() {
 
       {/* ── Breadcrumb ── */}
       <div className="max-w-7xl mx-auto px-6 pt-6 pb-0">
-        <nav className="flex items-center gap-2 font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-white/20">
+        <nav className="flex items-center gap-2 font-arabic text-[10px] tracking-[0.2em] text-white/20">
           <Link href="/lobby" className="hover:text-[#D4AF37]/50 transition-colors duration-300">المعرض</Link>
           <span>/</span>
           <Link href="/products" className="hover:text-[#D4AF37]/50 transition-colors duration-300">المُقتنيات</Link>
@@ -500,7 +500,7 @@ export default function ProductDetailPage() {
           >
 
             {/* Category label */}
-            <span className="reveal-item inline-block self-start font-SHAGHAVArabic text-[9px] tracking-[0.35em] text-[#C87D8A]/50 border border-[#C87D8A]/20 px-4 py-1.5 mb-6">
+            <span className="reveal-item inline-block self-start font-arabic text-[9px] tracking-[0.35em] text-[#C87D8A]/50 border border-[#C87D8A]/20 px-4 py-1.5 mb-6">
               {product.subtitle}
             </span>
 
@@ -516,10 +516,10 @@ export default function ProductDetailPage() {
               </span>
               {product.oldPrice && (
                 <>
-                  <span className="font-SHAGHAVArabic text-sm text-red-400/80 line-through tracking-wide">
+                  <span className="font-arabic text-sm text-red-400/80 line-through tracking-wide">
                     {product.oldPrice}
                   </span>
-                  <span className="font-SHAGHAVArabic text-[10px] tracking-[0.15em] text-[#C87D8A]/70 bg-[#4B1E28]/30 border border-[#C87D8A]/20 px-2.5 py-1">
+                  <span className="font-arabic text-[10px] tracking-[0.15em] text-[#C87D8A]/70 bg-[#4B1E28]/30 border border-[#C87D8A]/20 px-2.5 py-1">
                     خصم حصري
                   </span>
                 </>
@@ -530,17 +530,17 @@ export default function ProductDetailPage() {
             <div className="reveal-item w-full h-px bg-white/[0.06] mb-8" />
 
             {/* Description */}
-            <p className="reveal-item font-SHAGHAVArabic font-light text-sm text-[#C87D8A]/70 leading-[2.2] tracking-[0.08em] max-w-sm mb-8">
+            <p className="reveal-item font-arabic font-light text-sm text-[#C87D8A]/70 leading-[2.2] tracking-[0.08em] max-w-sm mb-8">
               {product.description}
             </p>
 
             {/* ── Color Selector ── */}
             <div className="reveal-item mb-8">
               <div className="flex items-center justify-between mb-4">
-                <span className="font-SHAGHAVArabic text-sm tracking-[0.15em] text-white/70">
+                <span className="font-arabic text-sm tracking-[0.15em] text-white/70">
                   تدرجات اللون
                 </span>
-                <span className="font-SHAGHAVArabic text-sm tracking-[0.1em] text-[#C87D8A]/80 font-medium">
+                <span className="font-arabic text-sm tracking-[0.1em] text-[#C87D8A]/80 font-medium">
                   {selectedColor.name}
                 </span>
               </div>
@@ -565,16 +565,16 @@ export default function ProductDetailPage() {
             <div id="size-selector" className="reveal-item mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex flex-col gap-1">
-                  <span className="font-SHAGHAVArabic text-sm tracking-[0.15em] text-white/70">
+                  <span className="font-arabic text-sm tracking-[0.15em] text-white/70">
                     المقاس المناسب
                   </span>
                   {showSizeError && (
-                    <span className="font-SHAGHAVArabic text-[10px] text-red-400 animate-pulse">
+                    <span className="font-arabic text-[10px] text-red-400 animate-pulse">
                       يرجى اختيار المقاس للمتابعة
                     </span>
                   )}
                 </div>
-                <button className="font-SHAGHAVArabic text-xs tracking-[0.1em] text-[#D4AF37]/60 hover:text-[#D4AF37]/90 transition-colors duration-300 underline underline-offset-2">
+                <button className="font-arabic text-xs tracking-[0.1em] text-[#D4AF37]/60 hover:text-[#D4AF37]/90 transition-colors duration-300 underline underline-offset-2">
                   دليل المقاسات
                 </button>
               </div>
@@ -586,7 +586,7 @@ export default function ProductDetailPage() {
                       setSelectedSize(size);
                       setShowSizeError(false);
                     }}
-                    className={`font-SHAGHAVArabic text-xs tracking-[0.1em] px-5 py-2.5 border transition-all duration-300 ${
+                    className={`font-arabic text-xs tracking-[0.1em] px-5 py-2.5 border transition-all duration-300 ${
                       selectedSize === size
                         ? "border-[#D4AF37] bg-[#4B1E28]/40 text-[#D4AF37]"
                         : showSizeError
@@ -602,7 +602,7 @@ export default function ProductDetailPage() {
 
             {/* ── Quantity Counter ── */}
             <div className="reveal-item mb-10">
-              <span className="font-SHAGHAVArabic text-sm tracking-[0.15em] text-white/70 block mb-4">
+              <span className="font-arabic text-sm tracking-[0.15em] text-white/70 block mb-4">
                 الكمية
               </span>
               <div className="flex items-center border border-white/15 w-32">
@@ -632,7 +632,7 @@ export default function ProductDetailPage() {
                 className="group relative flex items-center justify-center px-10 py-4 w-full max-w-sm bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-500 hover:border-[#D4AF37] animate-[pulse_3s_ease-in-out_infinite]"
               >
                 <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-                <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
+                <span className="relative z-10 font-arabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
                   إضـافـة للـحـقـيـبـة
                 </span>
               </button>
@@ -651,8 +651,8 @@ export default function ProductDetailPage() {
                 >
                   <Icon className="w-8 h-8 text-[#D4AF37]/40" strokeWidth={1} />
                   <div className="text-center">
-                    <p className="font-SHAGHAVArabic text-[11px] tracking-[0.15em] text-[#C87D8A]/80">{label}</p>
-                    <p className="font-SHAGHAVArabic text-[9px] tracking-[0.1em] text-white/20 mt-0.5">{sub}</p>
+                    <p className="font-arabic text-[11px] tracking-[0.15em] text-[#C87D8A]/80">{label}</p>
+                    <p className="font-arabic text-[9px] tracking-[0.1em] text-white/20 mt-0.5">{sub}</p>
                   </div>
                 </div>
               ))}
@@ -689,10 +689,10 @@ export default function ProductDetailPage() {
       <section className="max-w-7xl mx-auto px-6 py-20 border-t border-white/[0.05]" dir="rtl">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <span className="block font-SHAGHAVArabic text-[9px] tracking-[0.4em] text-[#C87D8A]/50 mb-3">من مجموعة شغف</span>
+            <span className="block font-arabic text-[9px] tracking-[0.4em] text-[#C87D8A]/50 mb-3">من مجموعة شغف</span>
             <h2 className="font-cormorant font-semibold text-3xl text-white/80 tracking-wide">أكملي أناقتك</h2>
           </div>
-          <Link href="/products" className="font-SHAGHAVArabic text-[10px] tracking-[0.25em] text-white/25 hover:text-[#D4AF37]/60 transition-colors duration-500">
+          <Link href="/products" className="font-arabic text-[10px] tracking-[0.25em] text-white/25 hover:text-[#D4AF37]/60 transition-colors duration-500">
             عرض الكل ←
           </Link>
         </div>
@@ -717,9 +717,9 @@ export default function ProductDetailPage() {
               <div className="mt-4 px-1 flex items-start justify-between gap-2">
                 <div>
                   <h3 className="font-cormorant text-base leading-snug text-white group-hover:text-[#D4AF37]/90 transition-colors duration-500">{item.title}</h3>
-                  <p className="font-SHAGHAVArabic text-[9px] text-white/30 tracking-[0.1em] mt-0.5">{item.subtitle}</p>
+                  <p className="font-arabic text-[9px] text-white/30 tracking-[0.1em] mt-0.5">{item.subtitle}</p>
                 </div>
-                <span className="flex-shrink-0 font-SHAGHAVArabic text-[10px] text-[#D4AF37] bg-[#4B1E28]/30 border border-[#D4AF37]/20 px-2.5 py-1 whitespace-nowrap">
+                <span className="flex-shrink-0 font-arabic text-[10px] text-[#D4AF37] bg-[#4B1E28]/30 border border-[#D4AF37]/20 px-2.5 py-1 whitespace-nowrap">
                   {item.price}
                 </span>
               </div>
@@ -733,7 +733,7 @@ export default function ProductDetailPage() {
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <p className="font-cormorant text-base text-white leading-tight">{product.title}</p>
-            <p className="font-SHAGHAVArabic text-[10px] text-[#D4AF37]/60 tracking-[0.15em]">
+            <p className="font-arabic text-[10px] text-[#D4AF37]/60 tracking-[0.15em]">
               {product.price}
               {product.oldPrice && <span className="text-white/25 line-through mr-2">{product.oldPrice}</span>}
             </p>
@@ -743,7 +743,7 @@ export default function ProductDetailPage() {
             className="group relative flex items-center justify-center px-7 py-3 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#D4AF37]"
           >
             <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-            <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-[11px] tracking-widest whitespace-nowrap">
+            <span className="relative z-10 font-arabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-[11px] tracking-widest whitespace-nowrap">
               إضافة للحقيبة
             </span>
           </button>

@@ -9,16 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "SHAGHAV-burgundy": "#4B1E28",
-        "SHAGHAV-black": "#0A0A0A",
-        "SHAGHAV-gold": "#D4AF37",
-        "SHAGHAV-rose": "#C87D8A",
+        "ANALIA-burgundy": "#4B1E28",
+        "ANALIA-black": "#0A0A0A",
+        "ANALIA-gold": "#D4AF37",
+        "ANALIA-rose": "#C87D8A",
       },
       fontFamily: {
         cormorant: ["var(--font-cormorant)"],
         montserrat: ["var(--font-montserrat)"],
         arabic: ["var(--font-el-messiri)"],
-        SHAGHAVArabic: ["var(--font-el-messiri)"],
+        ANALIAArabic: ["var(--font-el-messiri)"],
         feminine: ["var(--font-amiri)"],
       },
     },

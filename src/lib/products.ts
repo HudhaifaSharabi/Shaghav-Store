@@ -26,16 +26,16 @@ export const ALL_PRODUCTS: Product[] = [
     price: "٨,٩٠٠ ر.س",
     priceNum: 8900,
     oldPrice: "١٢,٠٠٠ ر.س",
-    image: "/images/shaghaf_masterpiece_1772392229139.png",
+    image: "/images/ANALIA_masterpiece_1772392229139.png",
     category: "1-of-1",
     isOneOfOne: true,
     colors: [
-      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/shaghaf_masterpiece_1772392229139.png" },
+      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/ANALIA_masterpiece_1772392229139.png" },
       { name: "أسود أونيكس", hex: "#1a1a1a", image: "/images/couture_one_1772392258498.png" },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     thumbnails: [
-      "/images/shaghaf_masterpiece_1772392229139.png",
+      "/images/ANALIA_masterpiece_1772392229139.png",
       "/images/couture_one_1772392258498.png",
       "/images/couture_two_1772392277554.png",
       "/images/lace_details_1772392328266.png",
@@ -54,12 +54,12 @@ export const ALL_PRODUCTS: Product[] = [
     category: "dresses",
     colors: [
       { name: "أسود أونيكس", hex: "#1a1a1a", image: "/images/couture_one_1772392258498.png" },
-      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/shaghaf_masterpiece_1772392229139.png" },
+      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/ANALIA_masterpiece_1772392229139.png" },
     ],
     sizes: ["S", "M", "L"],
     thumbnails: [
       "/images/couture_one_1772392258498.png",
-      "/images/shaghaf_masterpiece_1772392229139.png",
+      "/images/ANALIA_masterpiece_1772392229139.png",
       "/images/couture_two_1772392277554.png",
     ],
   },
@@ -97,12 +97,12 @@ export const ALL_PRODUCTS: Product[] = [
     category: "dresses",
     colors: [
       { name: "زيتي غامق", hex: "#2D3B2A", image: "/images/couture_two_1772392277554.png" },
-      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/shaghaf_masterpiece_1772392229139.png" },
+      { name: "عنابي ملكي", hex: "#4B1E28", image: "/images/ANALIA_masterpiece_1772392229139.png" },
     ],
     sizes: ["S", "M", "L"],
     thumbnails: [
       "/images/couture_two_1772392277554.png",
-      "/images/shaghaf_masterpiece_1772392229139.png",
+      "/images/ANALIA_masterpiece_1772392229139.png",
     ],
   },
   {

@@ -94,10 +94,10 @@ export default function AboutPage() {
         </div>
 
         <div className="relative z-10 text-center px-6">
-          <h1 className="about-hero-text font-arabic text-5xl md:text-8xl text-[#D4AF37] font-bold leading-tight mb-8 drop-shadow-2xl">
+          <h1 className="about-hero-text font-arabic text-6xl md:text-9xl text-[#D4AF37] leading-tight mb-8 drop-shadow-2xl font-normal">
             وراء كل تفصيلة.. شغف.
           </h1>
-          <p className="about-hero-text font-feminine text-lg md:text-2xl text-[#C87D8A]/80 tracking-[0.1em] font-light max-w-2xl mx-auto">
+          <p className="about-hero-text font-arabic text-lg md:text-2xl text-[#C87D8A]/80 tracking-[0.1em] font-light max-w-2xl mx-auto">
             قصةُ نسجٍ تحكيها القلوب، وأنوثةٌ تتجسدُ في خيوط شَغَف.
           </p>
         </div>
@@ -108,8 +108,8 @@ export default function AboutPage() {
         {/* Right Column: Narrative */}
         <div className="w-full md:w-[45%] text-right order-2 md:order-1">
           <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">Our Vision</span>
-          <h2 className="font-arabic text-4xl md:text-6xl text-[#D4AF37] font-bold mb-8">حكاية شغف</h2>
-          <p className="font-feminine text-lg md:text-xl text-[#C87D8A] leading-[2] opacity-90 text-justify">
+          <h2 className="font-arabic text-4xl md:text-6xl text-[#D4AF37] font-normal mb-8">حكاية شغف</h2>
+          <p className="font-arabic text-lg md:text-xl text-[#C87D8A] leading-[2] opacity-90 text-justify">
             بدأنا من إيمان عميق بأن الأنوثة لا تحتاج إلى تكلف لتبرز، بل تحتاج إلى قطع تُصنع بحب، وتُفصل بعناية فائقة. شغف ليست مجرد علامة تجارية؛ هي رحلة للبحث عن الجمال في أدق التفاصيل، لنموذج أزياء تروي قصتكِ، وتعكس ذوقكِ المتفرد في كل خطوة.
           </p>
           <div className="mt-12 h-px w-24 bg-gradient-to-l from-[#D4AF37] to-transparent" />
@@ -120,7 +120,7 @@ export default function AboutPage() {
           {/* Main Large Image */}
           <div className="w-[85%] aspect-[3/4] rounded-t-[30vw] overflow-hidden group shadow-2xl relative z-10">
             <img 
-              src="/images/shaghaf_masterpiece_1772392229139.png" 
+              src="/images/ANALIA_masterpiece_1772392229139.png" 
               className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
               alt="Luxury Masterpiece" 
             />
@@ -142,7 +142,7 @@ export default function AboutPage() {
       <section className="atelier-grid py-40 bg-gradient-to-b from-[#0A0A0A] via-[#4B1E28]/10 to-[#0A0A0A] px-6 md:px-[10vw]">
         <div className="text-center mb-32">
           <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A]/50 mb-4 block">The Gallery</span>
-          <h2 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-bold">فن الصناعة المتقنة</h2>
+          <h2 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-normal">فن الصناعة المتقنة</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-start">
@@ -157,7 +157,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8 text-right px-4">
               <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation I</span>
-              <p className="font-feminine text-white/50 text-sm">دقة التصميم في كل غرزة خيط.</p>
+              <p className="font-arabic text-white/50 text-sm">دقة التصميم في كل غرزة خيط.</p>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8 text-right px-4">
               <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation II</span>
-              <p className="font-feminine text-white/50 text-sm">الأناقة التي لا تبهت مع الزمن.</p>
+              <p className="font-arabic text-white/50 text-sm">الأناقة التي لا تبهت مع الزمن.</p>
             </div>
           </div>
 
@@ -187,7 +187,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-8 text-right px-4">
               <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation III</span>
-              <p className="font-feminine text-white/50 text-sm">لمسة حرير تعانق تفاصيلكِ.</p>
+              <p className="font-arabic text-white/50 text-sm">لمسة حرير تعانق تفاصيلكِ.</p>
             </div>
           </div>
         </div>
@@ -198,9 +198,9 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto flex flex-col items-center">
           <div className="w-[1px] h-20 bg-gradient-to-b from-[#D4AF37] to-transparent mb-16 opacity-50" />
           
-          <h2 className="quote-text font-arabic text-4xl md:text-7xl text-[#D4AF37] leading-[1.4] md:leading-[1.2] mb-20 font-light drop-shadow-2xl">
+          <h2 className="quote-text font-arabic text-5xl md:text-8xl text-[#D4AF37] leading-[1.4] md:leading-[1.2] mb-20 font-normal drop-shadow-2xl">
             جودة لا تُرى بالعين فقط، <br className="hidden md:block"/>
-            <span className="font-bold">بل تُشعر بالقلب.</span>
+            بل تُشعر بالقلب.
           </h2>
 
           <div className="reveal-item">

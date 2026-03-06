@@ -66,7 +66,7 @@ export default function Header() {
       <header ref={headerRef} className="fixed top-0 left-0 w-full z-[100] flex flex-col">
         {/* Announcement Bar */}
         <div className="w-full bg-[#4B1E28] py-3.5 flex justify-center items-center relative overflow-hidden border-b border-[#D4AF37]/20">
-          <p className="font-feminine text-[#D4AF37] text-sm md:text-base tracking-[0.1em] uppercase leading-none font-medium text-center px-4">
+          <p className="font-arabic text-[#D4AF37] text-sm md:text-base tracking-[0.1em] uppercase leading-none font-medium text-center px-4">
             تكريماً لحضوركِ الطاغي.. نهديكِ الشحن المجاني لكل طلباتكِ بـ ١٠,٠٠٠ ريال فأكثر.
           </p>
         </div>
@@ -79,7 +79,8 @@ export default function Header() {
            
  <div className="flex-1 flex items-center justify-start">
               <button 
-                onClick={() => setIsCartOpen(true)}
+                id="cart-icon"
+                onClick={() => setIsCartOpen(!isCartOpen)}
                 className="text-[#D4AF37] hover:scale-110 transition-transform relative p-2 cursor-pointer"
                 aria-label="حقيبة التسوق"
               >
@@ -89,8 +90,10 @@ export default function Header() {
             </div>
             {/* Center Column (Logo) */}
             <div className="flex justify-center shrink-0">
-              <Link href="/" className="font-cormorant text-2xl md:text-4xl font-semibold text-[#D4AF37] tracking-[0.4em] translate-x-[0.2em] uppercase transition-colors duration-500 hover:text-white">
-                SHAGHAV
+              <Link href="/" className="group flex items-center gap-3 transition-transform duration-500 hover:scale-105">
+                              <span className="font-cormorant text-2xl md:text-3xl font-semibold text-[#D4AF37] tracking-[0.2em] uppercase order-2">ANALIA</span>
+
+                <img src="/logo.png" alt="ANALIA Logo" className="h-8 md:h-12 w-auto object-contain order-1" />
               </Link>
             </div>
  <div className="flex-1 flex items-center justify-end gap-6 md:gap-8">

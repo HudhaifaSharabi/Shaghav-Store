@@ -12,6 +12,11 @@ export default function CheckoutPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [couponError, setCouponError] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState("");
+
   const cart = useAppStore((s) => s.cart);
   const clearCart = useAppStore((s) => s.clearCart);
   
@@ -73,6 +78,20 @@ export default function CheckoutPage() {
     }
   }, { dependencies: [mounted, isSuccess], scope: formRef });
 
+  const handleApplyCoupon = () => {
+    setCouponError("");
+    if (couponCode.toUpperCase() === "ANALIA10") {
+      const subtotal = cart.reduce((sum, item) => sum + item.priceNum * item.quantity, 0);
+      setDiscount(subtotal * 0.1);
+      setAppliedCoupon(couponCode.toUpperCase());
+      setCouponCode("");
+    } else {
+      setCouponError("كود الخصم غير صحيح");
+      setDiscount(0);
+      setAppliedCoupon("");
+    }
+  };
+
   const handleConfirmOrder = () => {
     // In a real app, you'd send data to an API here.
     // For now, we simulate success.
@@ -95,13 +114,13 @@ export default function CheckoutPage() {
           <h1 className="font-cormorant text-[#D4AF37] text-4xl md:text-5xl mb-6 tracking-wide">
             شكراً لثقتِك
           </h1>
-          <p className="font-SHAGHAVArabic font-light text-[#C87D8A]/70 text-sm leading-relaxed mb-12 tracking-widest px-4">
+          <p className="font-arabic font-light text-[#C87D8A]/70 text-sm leading-relaxed mb-12 tracking-widest px-4">
             تم استلام طلبكِ بعناية. فريق &quot;شغف&quot; سيتواصل معكِ قريباً عبر الواتساب لتأكيد موعد التسليم.
           </p>
           
           <Link href="/products" className="group relative inline-flex items-center justify-center px-10 py-4 bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#D4AF37]">
             <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-            <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
+            <span className="relative z-10 font-arabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-sm tracking-widest">
                العودة للمعرض
             </span>
           </Link>
@@ -123,7 +142,7 @@ export default function CheckoutPage() {
         <Lock className="w-4 h-4 text-[#D4AF37]/60" />
         <a href="/products">
         <h1 className="font-cormorant font-semibold text-2xl text-[#D4AF37] tracking-[0.3em] select-none">
-          SHAGHAV
+          ANALIA
         </h1>
         </a>
       </header>
@@ -139,38 +158,38 @@ export default function CheckoutPage() {
 
           <div className="grid grid-cols-1 gap-1">
             <div className="reveal-field">
-              <label className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">الاسم الكامل</label>
+              <label className="font-arabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">الاسم الكامل</label>
               <input
                 type="text"
                 placeholder="اكتبي اسمك هنا..."
-                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-SHAGHAVArabic text-sm"
+                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-arabic text-sm"
               />
             </div>
 
             <div className="reveal-field">
-              <label className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">رقم الجوال (للتواصل عبر الواتساب)</label>
+              <label className="font-arabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">رقم الجوال (للتواصل عبر الواتساب)</label>
               <input
                 type="tel"
                 placeholder="7xxxxxxxx"
-                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-SHAGHAVArabic text-sm"
+                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-arabic text-sm"
               />
             </div>
 
             <div className="reveal-field">
-              <label className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">المدينة</label>
+              <label className="font-arabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">المدينة</label>
               <input
                 type="text"
                 placeholder="مثلاً: الرياض، جدة..."
-                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-SHAGHAVArabic text-sm"
+                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-8 placeholder-white/10 font-arabic text-sm"
               />
             </div>
 
             <div className="reveal-field">
-              <label className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">العنوان بالتفصيل (الحي، الشارع)</label>
+              <label className="font-arabic text-[10px] tracking-[0.2em] text-[#C87D8A]/50 block">العنوان بالتفصيل (الحي، الشارع)</label>
               <input
                 type="text"
                 placeholder="حي النرجس، شارع..."
-                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-12 placeholder-white/10 font-SHAGHAVArabic text-sm"
+                className="w-full bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-4 outline-none transition-colors mb-12 placeholder-white/10 font-arabic text-sm"
               />
             </div>
           </div>
@@ -182,10 +201,10 @@ export default function CheckoutPage() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/5 blur-3xl pointer-events-none" />
                 
                 <div className="flex-1 flex flex-col gap-2 relative z-10">
-                  <h3 className="text-[#D4AF37] font-SHAGHAVArabic text-lg tracking-wide">
+                  <h3 className="text-[#D4AF37] font-arabic text-lg tracking-wide">
                     الدفع عند الاستلام (التسليم يداً بيد)
                   </h3>
-                  <p className="text-[#C87D8A]/70 font-SHAGHAVArabic text-xs leading-relaxed max-w-sm">
+                  <p className="text-[#C87D8A]/70 font-arabic text-xs leading-relaxed max-w-sm">
                     راحتكِ تهمنا، ادفعي بأمان عند استلام قطعتكِ وتأكدكِ من جودتها.
                   </p>
                 </div>
@@ -201,13 +220,13 @@ export default function CheckoutPage() {
               className="group relative flex items-center justify-center px-10 py-5 mt-14 w-full bg-[#4B1E28]/40 border border-[#D4AF37]/50 overflow-hidden shadow-[0_0_15px_rgba(75,30,40,0.5)] cursor-pointer transition-all duration-500 hover:border-[#D4AF37] animate-[pulse_3s_ease-in-out_infinite]"
             >
               <span className="absolute inset-0 bg-[#D4AF37] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-              <span className="relative z-10 font-SHAGHAVArabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-lg tracking-[0.2em]">
+              <span className="relative z-10 font-arabic font-medium text-[#D4AF37] group-hover:text-black transition-colors duration-500 text-lg tracking-[0.2em]">
                 تأكـيد الـطـلـب
               </span>
             </button>
           </div>
 
-          <p className="reveal-field text-center text-[10px] text-white/15 tracking-[0.3em] mt-8 font-SHAGHAVArabic">
+          <p className="reveal-field text-center text-[10px] text-white/15 tracking-[0.3em] mt-8 font-arabic">
              بضغطكِ على تأكيد الطلب، توافقين على شروط الاستخدام وسياسة الخصوصية.
           </p>
         </div>
@@ -227,34 +246,62 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex-1 flex flex-col justify-center min-w-0">
                     <h3 className="font-cormorant text-sm text-white/80 truncate tracking-wide">{item.title}</h3>
-                    <p className="font-SHAGHAVArabic text-[10px] text-[#C87D8A]/50 mt-1">
+                    <p className="font-arabic text-[10px] text-[#C87D8A]/50 mt-1">
                       {item.color} · {item.size}
                     </p>
                     <div className="flex items-center justify-between mt-2">
                        <span className="font-cormorant text-xs text-[#D4AF37]">{item.price}</span>
-                       <span className="font-SHAGHAVArabic text-[9px] text-white/20">× {item.quantity}</span>
+                       <span className="font-arabic text-[9px] text-white/20">× {item.quantity}</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* ── Coupon Section ── */}
+            <div className="mb-8 p-4 border border-[#4B1E28]/50 bg-[#4B1E28]/5">
+              <label className="font-arabic text-[9px] tracking-[0.2em] text-[#C87D8A]/50 block mb-2">هل لديكِ كود خصم؟</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  placeholder="ادخلي الكود هنا..."
+                  className="flex-1 bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white py-2 outline-none transition-colors placeholder-white/10 font-arabic text-xs"
+                />
+                <button
+                  onClick={handleApplyCoupon}
+                  className="px-4 py-2 border border-[#D4AF37]/30 text-[#D4AF37] font-arabic text-[10px] tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all duration-300"
+                >
+                  تطبيق
+                </button>
+              </div>
+              {couponError && <p className="text-red-400 text-[10px] mt-2 font-arabic">{couponError}</p>}
+              {appliedCoupon && <p className="text-[#D4AF37] text-[10px] mt-2 font-arabic animate-pulse">تم تطبيق كود: {appliedCoupon} ✓</p>}
+            </div>
+
             <div className="flex flex-col gap-4 border-t border-white/5 pt-8">
-              <div className="flex items-center justify-between font-SHAGHAVArabic text-xs text-white/40 tracking-wider">
+              <div className="flex items-center justify-between font-arabic text-xs text-white/40 tracking-wider">
                 <span>المجموع الفرعي</span>
                 <span>{formatPrice(subtotal)}</span>
               </div>
-              <div className="flex items-center justify-between font-SHAGHAVArabic text-xs text-[#C87D8A]/80 tracking-wider">
+              {discount > 0 && (
+                <div className="flex items-center justify-between font-arabic text-xs text-[#D4AF37] tracking-wider">
+                  <span>الخصم</span>
+                  <span>- {formatPrice(discount)}</span>
+                </div>
+              )}
+              <div className="flex items-center justify-between font-arabic text-xs text-[#C87D8A]/80 tracking-wider">
                 <span>الشحن</span>
                 <span>مجاناً</span>
               </div>
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/5">
-                <span className="font-SHAGHAVArabic text-sm text-[#D4AF37]/60 tracking-widest">الإجمالي</span>
-                <span className="font-cormorant text-2xl text-[#D4AF37] font-semibold">{formatPrice(total)}</span>
+                <span className="font-arabic text-sm text-[#D4AF37]/60 tracking-widest">الإجمالي</span>
+                <span className="font-cormorant text-2xl text-[#D4AF37] font-semibold">{formatPrice(subtotal - discount)}</span>
               </div>
             </div>
 
-            <Link href="/products" className="flex items-center justify-center gap-2 mt-10 font-SHAGHAVArabic text-[10px] text-white/20 hover:text-[#D4AF37]/50 transition-colors duration-300 tracking-[0.2em] group">
+            <Link href="/products" className="flex items-center justify-center gap-2 mt-10 font-arabic text-[10px] text-white/20 hover:text-[#D4AF37]/50 transition-colors duration-300 tracking-[0.2em] group">
                تعديل الحقيبة
                <ChevronRight className="w-3 h-3 rotate-180 group-hover:translate-x-1 transition-transform" />
             </Link>

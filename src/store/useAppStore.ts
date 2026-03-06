@@ -93,7 +93,7 @@ export const useAppStore = create<AppState>()(
       clearCart: () => set({ cart: [] }),
     }),
     {
-      name: "SHAGHAV-storage",   // localStorage key
+      name: "ANALIA-storage",   // localStorage key
       version: 3,               // bump version to flush old access flags
     }
   )

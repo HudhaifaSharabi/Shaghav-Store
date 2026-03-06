@@ -216,7 +216,7 @@ export default function Home() {
             loop
             playsInline
             className="h-full w-full object-cover scale-[1.02]"
-            src="/videos/SHAGHAV-gate-desktop.mp4"
+            src="/videos/ANALIA-gate-desktop.mp4"
           />
           <div className="hero-overlay absolute inset-0 bg-[#4B1E28]" />
         </div>
@@ -252,7 +252,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-[#4B1E28] blur-[150px] opacity-20 pointer-events-none rounded-full" />
         
         <div className="relative z-10 max-w-4xl">
-           <span className="block font-feminine text-[10px] uppercase tracking-[0.8em] text-[#D4AF37]/30 mb-12">The Philosophy</span>
+           <span className="block font-arabic text-[10px] uppercase tracking-[0.8em] text-[#D4AF37]/30 mb-12">The Philosophy</span>
            <h2 ref={manifestoTextRef} className="font-arabic text-3xl md:text-6xl text-[#D4AF37] drop-shadow-xl leading-[1.6] max-w-4xl px-4 font-bold">
             الأنوثة ليست شكلاً.. بل أثرٌ يُترك في المكان.
           </h2>
@@ -270,7 +270,7 @@ export default function Home() {
         >
           {/* Headline Slide */}
           <div className="runway-item w-[60vw] md:w-[40vw] flex-shrink-0">
-            <span className="block font-feminine text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">The Selection</span>
+            <span className="block font-arabic text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">The Selection</span>
             <h2 className="font-cormorant text-6xl md:text-9xl text-white font-light lowercase">Trending<br/><span className="text-[#D4AF37] font-semibold italic">Pieces</span></h2>
           </div>
 
@@ -285,7 +285,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-8 right-8 flex flex-col items-end">
                     <span className="font-arabic text-2xl text-white group-hover:text-[#D4AF37] transition-colors font-medium">{product.title}</span>
-                    <span className="font-feminine text-xs text-[#D4AF37]/60 mt-2 tracking-[0.2em]">{product.price}</span>
+                    <span className="font-arabic text-xs text-[#D4AF37]/60 mt-2 tracking-[0.2em]">{product.price}</span>
                 </div>
               </div>
             </Link>
@@ -354,7 +354,7 @@ export default function Home() {
               <Gift className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
             <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">تغليف يليق بكِ</h3>
-            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+            <p className="font-arabic text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
               كل قطعة تصلكِ في صندوق مخملي مُعطر، لتكون لحظة فتحكِ للهدية ذكرى لا تُنسى.
             </p>
           </div>
@@ -364,7 +364,7 @@ export default function Home() {
               <Wallet className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
             <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">دفع آمن ومرن</h3>
-            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+            <p className="font-arabic text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
               خيارات دفع متعددة تضمن لكِ الخصوصية والسهولة، مع خدمة الدفع عند الاستلام.
             </p>
           </div>
@@ -374,7 +374,7 @@ export default function Home() {
               <Scissors className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
             <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">خياطة حسب القياس</h3>
-            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+            <p className="font-arabic text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
               نوفر خدمة التعديل المجاني لضمان أن كل قطعة تعانق تفاصيلكِ بمنتهى الدقة.
             </p>
           </div>
@@ -383,9 +383,12 @@ export default function Home() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="py-24 bg-black border-t border-white/10 px-6 font-feminine">
+      <footer className="py-24 bg-black border-t border-white/10 px-6 font-arabic">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="font-cormorant text-4xl text-[#D4AF37] tracking-[0.6em] mb-12 uppercase">SHAGHAV</h2>
+          <div className="flex items-center justify-center gap-4 mb-12 opacity-80">
+            <h2 className="font-cormorant text-2xl md:text-3xl text-[#D4AF37] tracking-[0.4em] uppercase">ANALIA</h2>
+            <img src="/logo.png" alt="SHAGHAV" className="h-10 md:h-14 w-auto object-contain" />
+          </div>
           <div className="flex justify-center gap-12 mb-16">
             <Link href="/products" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Products</Link>
             <Link href="/" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Philosophy</Link>

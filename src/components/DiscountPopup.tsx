@@ -111,10 +111,10 @@ export default function DiscountPopup() {
         >
           {!isSubmitted ? (
             <>
-              <h2 className="popup-stagger font-arabic text-[#D4AF37] text-3xl md:text-4xl mb-6 font-bold tracking-wide">
+              <h2 className="popup-stagger font-arabic text-[#D4AF37] text-3xl md:text-4xl mb-6 font-normal tracking-wide">
                 انضمي لنخبة شغف
               </h2>
-              <p className="popup-stagger font-feminine text-[#C87D8A] text-base leading-relaxed mb-10 opacity-90">
+              <p className="popup-stagger font-arabic text-[#C87D8A] text-base leading-relaxed mb-10 opacity-90">
                 لأنكِ تستحقين الأفضل، نود إطلاعكِ على أحدث مجموعاتنا الحصرية. اتركي رقمكِ واحصلي على خصم خاص لطلبكِ القادم.
               </p>
 
@@ -153,18 +153,18 @@ export default function DiscountPopup() {
               <div className="popup-stagger flex justify-center mb-6">
                 <CheckCircle2 size={70} strokeWidth={1} color="#D4AF37" className="animate-bounce" />
               </div>
-              <h3 className="popup-stagger font-arabic text-[#D4AF37] text-3xl mb-4 font-bold">
+              <h3 className="popup-stagger font-arabic text-[#D4AF37] text-3xl mb-4 font-normal">
                 أهلاً بكِ في عالمنا
               </h3>
-              <p className="popup-stagger font-feminine text-[#C87D8A] text-lg mb-10">
+              <p className="popup-stagger font-arabic text-[#C87D8A] text-lg mb-10">
                 كود الخصم الحصري الخاص بكِ هو:
               </p>
               <div className="popup-stagger border-2 border-dashed border-[#D4AF37]/60 p-6 rounded-sm bg-[#D4AF37]/5">
                 <span className="font-montserrat text-[#D4AF37] text-4xl font-black tracking-[0.3em]">
-                  SHAGHAF10
+                  ANALIA10
                 </span>
               </div>
-              <p className="popup-stagger font-feminine text-[#C87D8A]/50 text-xs mt-8 italic">
+              <p className="popup-stagger font-arabic text-[#C87D8A]/50 text-xs mt-8 italic">
                 * يطبق الخصم عند الدفع لأول طلب
               </p>
             </div>
@@ -178,7 +178,7 @@ export default function DiscountPopup() {
           padding-right: 12px !important;
         }
         .luxury-phone-input .form-control {
-          font-family: var(--font-arabic) !important;
+          font-family: var(--font-aref-ruqaa) !important;
           direction: ltr !important;
           text-align: left !important;
         }

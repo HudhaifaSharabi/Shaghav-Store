@@ -27,8 +27,12 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: "SHAGHAV | Ultra-Luxury E-commerce",
+  title: "ANALIA | ANALIA Store",
   description: "The New Era of Luxury",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 import Header from "@/components/layout/Header";
@@ -41,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" className={`${cormorant.variable} ${montserrat.variable} ${elMessiri.variable} ${amiri.variable}`}>
-       <body className="antialiased font-feminine bg-black text-[#F5F5F5]">
+       <body className="antialiased font-arabic bg-black text-[#F5F5F5]">
         <ScrollToTop />
         <Header />
         {children}
