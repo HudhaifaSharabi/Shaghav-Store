@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -215,8 +216,9 @@ export default function Home() {
             muted
             loop
             playsInline
+            preload="auto"
             className="h-full w-full object-cover scale-[1.02]"
-            src="/videos/ANALIA-gate-desktop.mp4"
+            src="/videos/ANALIA-gate-desktop.webm"
           />
           <div className="hero-overlay absolute inset-0 bg-[#4B1E28]" />
         </div>
@@ -277,10 +279,13 @@ export default function Home() {
           {ALL_PRODUCTS.slice(0, 4).map((product) => (
             <Link key={product.id} href={`/products/${product.id}`} className="runway-item group w-[75vw] md:w-[35vw] flex-shrink-0 will-change-transform">
               <div className="relative aspect-[3/4.5] md:aspect-[3/4] md:h-[80vh] rounded-t-[40vw] md:rounded-t-[20vw] overflow-hidden bg-[#111] mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
-                <img 
+                <Image 
                   src={product.image} 
                   alt={product.title} 
-                  className="w-full h-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-110"
+                  sizes="(max-width: 768px) 75vw, 35vw"
+                  priority={ALL_PRODUCTS.indexOf(product) < 2}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-8 right-8 flex flex-col items-end">
@@ -305,7 +310,12 @@ export default function Home() {
             <div className="flex flex-col items-start">
                <div className="category-card overflow-hidden relative group rounded-t-[20vw] aspect-[3/4] w-full mb-8">
                   <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
-                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000" className="object-cover w-full h-full" alt="Evening Dresses" />
+                    <Image 
+                      src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000" 
+                      alt="Evening Dresses"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
                     <h3 className="font-arabic text-3xl md:text-5xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">فساتين السهرة</h3>
@@ -318,7 +328,12 @@ export default function Home() {
             <div className="flex flex-col items-end md:mt-20">
                <div className="category-card overflow-hidden relative group rounded-t-[20vw] aspect-[3/4] w-full md:w-[85%] mb-8">
                   <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
-                    <img src="/images/luxury-sleepwear.png" className="object-cover w-full h-full" alt="Luxury Sleepwear" />
+                    <Image 
+                      src="/images/luxury-sleepwear.png" 
+                      alt="Luxury Sleepwear"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
                     <h3 className="font-arabic text-3xl md:text-5xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">ملابس النوم</h3>
@@ -331,7 +346,12 @@ export default function Home() {
             <div className="md:col-span-2 flex flex-col items-center md:pt-40">
                <div className="category-card overflow-hidden relative group rounded-t-[200px] aspect-[16/9] w-full md:w-[85%] mb-8">
                   <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
-                    <img src="/images/lingerie-category.png" className="object-cover w-full h-full font-bold" alt="Lingerie Collection" />
+                    <Image 
+                      src="/images/lingerie-category.png" 
+                      alt="Lingerie Collection"
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
                     <h3 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">اللانجري</h3>
@@ -387,7 +407,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-12 opacity-80">
             <h2 className="font-cormorant text-2xl md:text-3xl text-[#D4AF37] tracking-[0.4em] uppercase">ANALIA</h2>
-            <img src="/logo.png" alt="SHAGHAV" className="h-10 md:h-14 w-auto object-contain" />
+            <Image 
+              src="/logo.png" 
+              alt="ANALIA logo" 
+              width={56} 
+              height={56} 
+              className="h-10 md:h-14 w-auto object-contain" 
+            />
           </div>
           <div className="flex justify-center gap-12 mb-16">
             <Link href="/products" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Products</Link>

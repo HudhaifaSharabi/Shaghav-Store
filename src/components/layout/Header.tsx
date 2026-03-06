@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ShoppingBag, Menu } from "lucide-react";
+import Image from "next/image";
+import { ShoppingBag, Menu, X } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -34,8 +35,13 @@ function CartBadge() {
 
 export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuOverlayRef = useRef<HTMLDivElement>(null);
+  const menuLinksRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     ScrollTrigger.create({
@@ -61,6 +67,49 @@ export default function Header() {
     });
   }, { scope: headerRef });
 
+  // Mobile Menu Animation
+  useGSAP(() => {
+    if (isMenuOpen) {
+      // Open Menu
+      gsap.to(menuOverlayRef.current, { 
+        display: "block",
+        opacity: 1, 
+        duration: 0.4 
+      });
+      gsap.to(mobileMenuRef.current, { 
+        x: 0, 
+        duration: 0.6, 
+        ease: "power3.out" 
+      });
+      if (menuLinksRef.current) {
+        gsap.fromTo(menuLinksRef.current.children, 
+          { x: 50, opacity: 0 },
+          { x: 0, opacity: 1, stagger: 0.1, duration: 0.5, delay: 0.2, ease: "power2.out" }
+        );
+      }
+    } else {
+      // Close Menu
+      gsap.to(mobileMenuRef.current, { 
+        x: "100%", 
+        duration: 0.5, 
+        ease: "power3.in" 
+      });
+      gsap.to(menuOverlayRef.current, { 
+        opacity: 0, 
+        duration: 0.4,
+        onComplete: () => {
+          gsap.set(menuOverlayRef.current, { display: "none" });
+        }
+      });
+    }
+  }, [isMenuOpen]);
+
+  const navLinks = [
+    { name: "من نحن", href: "/about" },
+    { name: "المنتجات", href: "/products" },
+    { name: "الأسئلة الشائعة", href: "/faq" },
+  ];
+
   return (
     <>
       <header ref={headerRef} className="fixed top-0 left-0 w-full z-[100] flex flex-col">
@@ -73,11 +122,10 @@ export default function Header() {
 
         {/* Navigation */}
         <nav ref={navRef} className="w-full transition-all duration-500 bg-transparent py-4 px-6 md:px-12 border-b border-transparent">
-          <div className="max-w-screen-2xl mx-auto flex items-center justify-between">
+          <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4">
             
-            {/* Right Column (Links - RTL) */}
-           
- <div className="flex-1 flex items-center justify-start">
+            {/* Start (Right in RTL) - Cart Icon */}
+            <div className="flex-1 flex items-center justify-start">
               <button 
                 id="cart-icon"
                 onClick={() => setIsCartOpen(!isCartOpen)}
@@ -88,32 +136,94 @@ export default function Header() {
                 <CartBadge />
               </button>
             </div>
-            {/* Center Column (Logo) */}
-            <div className="flex justify-center shrink-0">
-              <Link href="/" className="group flex items-center gap-3 transition-transform duration-500 hover:scale-105">
-                              <span className="font-cormorant text-2xl md:text-3xl font-semibold text-[#D4AF37] tracking-[0.2em] uppercase order-2">ANALIA</span>
 
-                <img src="/logo.png" alt="ANALIA Logo" className="h-8 md:h-12 w-auto object-contain order-1" />
+            {/* Center - Logo */}
+            <div className="flex justify-center shrink-0">
+              <Link href="/" className="group flex items-center gap-2 md:gap-3 transition-transform duration-500 hover:scale-105">
+                <span className="font-cormorant text-xl md:text-3xl font-semibold text-[#D4AF37] tracking-[0.1em] md:tracking-[0.2em] uppercase order-2">ANALIA</span>
+                <Image 
+                  src="/logo.png" 
+                  alt="ANALIA Logo" 
+                  width={48} 
+                  height={48} 
+                  className="h-7 md:h-12 w-auto object-contain order-1" 
+                  priority
+                />
               </Link>
             </div>
- <div className="flex-1 flex items-center justify-end gap-6 md:gap-8">
-  <Link href="/about" className="font-arabic text-[#C87D8A] hover:text-[#D4AF37] text-sm md:text-base tracking-wide transition-colors">
-                من نحن
-              </Link>
-              <Link href="/products" className="font-arabic text-[#C87D8A] hover:text-[#D4AF37] text-sm md:text-base tracking-wide transition-colors">
-                المنتجات
-              </Link>
-              
-              <Link href="/faq" className="font-arabic text-[#C87D8A] hover:text-[#D4AF37] text-sm md:text-base tracking-wide transition-colors">
-                الأسئلة الشائعة
-              </Link>
+
+            {/* End (Left in RTL) - Links / Hamburger */}
+            <div className="flex-1 flex items-center justify-end">
+              {/* Desktop Links */}
+              <div className="hidden md:flex items-center gap-8">
+                {navLinks.map((link) => (
+                  <Link 
+                    key={link.href}
+                    href={link.href} 
+                    className="font-arabic text-[#C87D8A] hover:text-[#D4AF37] text-sm md:text-base tracking-wide transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Mobile Menu Toggle */}
+              <button 
+                onClick={() => setIsMenuOpen(true)}
+                className="block md:hidden text-[#D4AF37] p-2"
+                aria-label="القائمة"
+              >
+                <Menu size={28} strokeWidth={1.5} />
+              </button>
             </div>
-            {/* Left Column (Cart - RTL) */}
-           
 
           </div>
         </nav>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <div 
+        ref={menuOverlayRef}
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] hidden opacity-0"
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Mobile Menu Sidebar */}
+      <div 
+        ref={mobileMenuRef}
+        className="fixed top-0 right-0 h-full w-[85vw] max-w-[400px] bg-[#0A0A0A] border-l border-[#D4AF37]/20 z-[160] translate-x-full shadow-2xl flex flex-col pt-24 px-10"
+      >
+        <button 
+          onClick={() => setIsMenuOpen(false)}
+          className="absolute top-8 left-8 text-[#D4AF37] p-2 hover:rotate-90 transition-transform duration-300"
+        >
+          <X size={32} strokeWidth={1.5} />
+        </button>
+
+        <div className="flex flex-col gap-12 mt-10" ref={menuLinksRef}>
+          {navLinks.map((link) => (
+            <Link 
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-arabic text-3xl text-white hover:text-[#D4AF37] transition-colors tracking-widest text-right"
+            >
+              {link.name}
+            </Link>
+          ))}
+          
+          <div className="h-px w-full bg-gradient-to-l from-[#D4AF37]/40 to-transparent my-4" />
+          
+          <div className="flex flex-col gap-6">
+             <p className="font-arabic text-[#C87D8A]/50 text-sm tracking-widest text-right">تواصلوا معنا عبر الواتساب</p>
+             <p className="font-cormorant text-[#D4AF37] text-xl tracking-widest text-right">+966 50 000 0000</p>
+          </div>
+        </div>
+
+        <div className="mt-auto pb-16 opacity-30 text-center">
+          <p className="font-cormorant text-xs tracking-[0.5em] text-[#D4AF37]">ANALIA STORE</p>
+        </div>
+      </div>
 
       {/* Global Cart Drawer */}
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
