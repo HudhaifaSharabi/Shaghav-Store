@@ -315,6 +315,7 @@ export default function Home() {
                       alt="Evening Dresses"
                       fill
                       className="object-cover"
+                      unoptimized
                     />
                   </div>
                   <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
