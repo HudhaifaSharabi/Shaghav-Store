@@ -19,7 +19,7 @@ const config: Config = {
         montserrat: ["var(--font-montserrat)"],
         arabic: ["var(--font-el-messiri)"],
         SHAGHAVArabic: ["var(--font-el-messiri)"],
-        tajawal: ["var(--font-tajawal)"],
+        feminine: ["var(--font-amiri)"],
       },
     },
   },

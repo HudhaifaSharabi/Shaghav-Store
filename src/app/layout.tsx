@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Montserrat, El_Messiri, Tajawal } from "next/font/google";
+import { Cormorant_Garamond, Montserrat, El_Messiri, Amiri } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-cormorant",
 });
 
@@ -20,10 +20,10 @@ const elMessiri = El_Messiri({
   variable: "--font-el-messiri",
 });
 
-const tajawal = Tajawal({
+const amiri = Amiri({
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-tajawal",
+  weight: ["400", "700"],
+  variable: "--font-amiri",
 });
 
 export const metadata: Metadata = {
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 };
 
 import Header from "@/components/layout/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function RootLayout({
   children,
@@ -39,8 +40,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cormorant.variable} ${montserrat.variable} ${elMessiri.variable} ${tajawal.variable}`}>
-       <body className="antialiased font-montserrat bg-black text-[#F5F5F5]">
+    <html lang="ar" dir="rtl" className={`${cormorant.variable} ${montserrat.variable} ${elMessiri.variable} ${amiri.variable}`}>
+       <body className="antialiased font-feminine bg-black text-[#F5F5F5]">
+        <ScrollToTop />
         <Header />
         {children}
       </body>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowLeft } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -23,137 +24,200 @@ function PulsingCTA({ href, children, className = "" }: { href: string; children
 
 export default function AboutPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const parallaxImgRef = useRef<HTMLDivElement>(null);
-  const fabricBgRef = useRef<HTMLDivElement>(null);
+  const visionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // 1. Hero Reveal
+    // 1. Hero Entrance
     gsap.fromTo(".about-hero-text", 
-      { opacity: 0, y: 30, filter: "blur(10px)" },
-      { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, stagger: 0.3, ease: "power3.out" }
+      { opacity: 0, y: 50, filter: "blur(15px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.5, stagger: 0.3, ease: "power4.out" }
     );
 
-    // 2. Section Staggered Reveal
-    gsap.utils.toArray<HTMLElement>(".reveal-item").forEach((item) => {
-      gsap.fromTo(item,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 85%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
+    // 2. Vision Section: Image Parallax
+    gsap.to(".vision-parallax", {
+      y: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".vision-section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
     });
 
-    // 3. Genesis Image Parallax
-    if (parallaxImgRef.current) {
-        gsap.to(parallaxImgRef.current, {
-          y: "15%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: parallaxImgRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-    }
+    // 3. Atelier Grid: Staggered Reveal
+    gsap.fromTo(".atelier-item", 
+      { opacity: 0, y: 80 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.2, 
+        stagger: 0.2, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".atelier-grid",
+          start: "top 80%",
+        }
+      }
+    );
 
-    // 4. Craftsmanship Parallax
-    if (fabricBgRef.current) {
-        gsap.to(fabricBgRef.current, {
-          y: "20%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: fabricBgRef.current.parentElement,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        });
-    }
+    // 4. Quote Stagger
+    gsap.fromTo(".quote-text", 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.5, 
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".quote-section",
+          start: "top 85%",
+        }
+      }
+    );
 
   }, { scope: containerRef });
 
   return (
-    <main ref={containerRef} className="bg-[#0A0A0A] text-[#F5F5F5] min-h-screen pt-[120px]" dir="rtl">
+    <main ref={containerRef} className="bg-[#0A0A0A] text-[#F5F5F5] min-h-screen pt-[120px] overflow-x-hidden" dir="rtl">
       
-      {/* ── Section 1: The Soul (Hero) ── */}
-      <section className="relative min-h-[70vh] flex flex-col items-center justify-center overflow-hidden px-6">
-        {/* Background Radial Glow */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4B1E28]/15 rounded-full blur-[120px]" />
+      {/* ── Section 1: Cinematic Hero ── */}
+      <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
+        {/* Background Image: Flowing Fabric */}
+        <div className="absolute inset-0">
+          <img 
+             src="/images/lace_details_1772392328266.png" 
+             className="w-full h-full object-cover scale-[1.05]" 
+             alt="Luxury Fabric Background" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-[#0A0A0A]/60 to-[#0A0A0A]" />
         </div>
 
-        <div className="relative z-10 text-center max-w-4xl">
-          <h1 className="about-hero-text font-arabic text-5xl md:text-7xl lg:text-8xl text-[#D4AF37] font-bold leading-tight mb-8">
+        <div className="relative z-10 text-center px-6">
+          <h1 className="about-hero-text font-arabic text-5xl md:text-8xl text-[#D4AF37] font-bold leading-tight mb-8 drop-shadow-2xl">
             وراء كل تفصيلة.. شغف.
           </h1>
-          <p className="about-hero-text font-arabic text-lg md:text-2xl text-[#C87D8A] tracking-[0.1em] font-light">
-            لم نُصمم لنكسو الجسد، بل لنعانق الروح.
+          <p className="about-hero-text font-feminine text-lg md:text-2xl text-[#C87D8A]/80 tracking-[0.1em] font-light max-w-2xl mx-auto">
+            قصةُ نسجٍ تحكيها القلوب، وأنوثةٌ تتجسدُ في خيوط شَغَف.
           </p>
         </div>
       </section>
 
-      {/* ── Section 2: The Genesis ── */}
-      <section className="py-24 px-6 md:px-[10vw] flex flex-col md:flex-row gap-16 items-center bg-gradient-to-b from-[#0A0A0A] to-[#4B1E28]/10 overflow-hidden">
-        {/* Right Content */}
-        <div className="reveal-item w-full md:w-1/2">
-          <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">Our Story</span>
-          <h2 className="font-arabic text-4xl md:text-5xl text-[#D4AF37] font-bold mb-8">حكاية شغف</h2>
-          <p className="font-arabic text-lg md:text-xl text-[#C87D8A] leading-[1.8] opacity-90 text-justify">
-            بدأنا من إيمان عميق بأن الأنوثة لا تحتاج إلى تكلف لتبرز، بل تحتاج إلى قطع تُصنع بحب، وتُفصل بعناية فائقة. نحن هنا لنقدم لكِ أزياء تروي قصتكِ، وتعكس ذوقكِ المتفرد في كل خطوة.
+      {/* ── Section 2: The Vision (Overlapping Parallax) ── */}
+      <section className="vision-section py-32 px-6 md:px-[10vw] flex flex-col md:flex-row items-center gap-20 bg-[#0A0A0A]">
+        {/* Right Column: Narrative */}
+        <div className="w-full md:w-[45%] text-right order-2 md:order-1">
+          <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">Our Vision</span>
+          <h2 className="font-arabic text-4xl md:text-6xl text-[#D4AF37] font-bold mb-8">حكاية شغف</h2>
+          <p className="font-feminine text-lg md:text-xl text-[#C87D8A] leading-[2] opacity-90 text-justify">
+            بدأنا من إيمان عميق بأن الأنوثة لا تحتاج إلى تكلف لتبرز، بل تحتاج إلى قطع تُصنع بحب، وتُفصل بعناية فائقة. شغف ليست مجرد علامة تجارية؛ هي رحلة للبحث عن الجمال في أدق التفاصيل، لنموذج أزياء تروي قصتكِ، وتعكس ذوقكِ المتفرد في كل خطوة.
           </p>
+          <div className="mt-12 h-px w-24 bg-gradient-to-l from-[#D4AF37] to-transparent" />
         </div>
 
-        {/* Left Image (Arched Parallax) */}
-        <div className="w-full md:w-[40%] aspect-[3/4] rounded-t-[20vw] overflow-hidden relative group">
-          <div ref={parallaxImgRef} className="absolute -top-[20%] left-0 w-full h-[140%]">
+        {/* Left Column: Overlapping Images */}
+        <div className="w-full md:w-[55%] relative flex justify-end order-1 md:order-2">
+          {/* Main Large Image */}
+          <div className="w-[85%] aspect-[3/4] rounded-t-[30vw] overflow-hidden group shadow-2xl relative z-10">
             <img 
-              src="/images/about-soul.png" 
-              className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105" 
-              alt="Shaghav Soul" 
+              src="/images/shaghaf_masterpiece_1772392229139.png" 
+              className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
+              alt="Luxury Masterpiece" 
+            />
+            <div className="absolute inset-0 bg-[#4B1E28]/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700" />
+          </div>
+
+          {/* Overlapping Small Image with Parallax */}
+          <div className="vision-parallax absolute -bottom-16 -left-8 w-[55%] aspect-square rounded-t-full border-8 border-[#0A0A0A] overflow-hidden z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] group">
+             <img 
+              src="/images/luxury-sleepwear.png" 
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+              alt="Detail Parallax" 
             />
           </div>
-          <div className="absolute inset-0 bg-[#4B1E28]/10 mix-blend-overlay" />
         </div>
       </section>
 
-      {/* ── Section 3: The Craftsmanship ── */}
-      <section className="h-[65vh] w-full relative overflow-hidden flex items-center justify-center">
-        {/* Background Parallax Image */}
-        <div ref={fabricBgRef} className="absolute -top-[30%] left-0 w-full h-[160%] z-0">
-          <img 
-            src="/images/about-fabric.png" 
-            className="w-full h-full object-cover opacity-60" 
-            alt="Luxury Fabric Detail" 
-          />
+      {/* ── Section 3: The Atelier Grid (Asymmetric) ── */}
+      <section className="atelier-grid py-40 bg-gradient-to-b from-[#0A0A0A] via-[#4B1E28]/10 to-[#0A0A0A] px-6 md:px-[10vw]">
+        <div className="text-center mb-32">
+          <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A]/50 mb-4 block">The Gallery</span>
+          <h2 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-bold">فن الصناعة المتقنة</h2>
         </div>
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-[#0A0A0A]/60 z-1" />
 
-        <div className="relative z-10 text-center px-6 max-w-4xl reveal-item">
-          <h2 className="font-arabic text-4xl md:text-6xl text-[#D4AF37] font-light leading-snug drop-shadow-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-start">
+          {/* Column 1 */}
+          <div className="atelier-item group relative">
+            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl">
+              <img 
+                src="/images/couture_one_1772392258498.png" 
+                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
+                alt="Atelier One" 
+              />
+            </div>
+            <div className="mt-8 text-right px-4">
+              <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation I</span>
+              <p className="font-feminine text-white/50 text-sm">دقة التصميم في كل غرزة خيط.</p>
+            </div>
+          </div>
+
+          {/* Column 2: Pushed Down */}
+          <div className="atelier-item group relative md:mt-32">
+            <div className="aspect-[3/4.5] rounded-t-[18vw] overflow-hidden shadow-2xl">
+              <img 
+                src="/images/silk_sleepwear_1772392297928.png" 
+                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
+                alt="Atelier Two" 
+              />
+            </div>
+            <div className="mt-8 text-right px-4">
+              <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation II</span>
+              <p className="font-feminine text-white/50 text-sm">الأناقة التي لا تبهت مع الزمن.</p>
+            </div>
+          </div>
+
+          {/* Column 3 */}
+          <div className="atelier-item group relative">
+            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl">
+              <img 
+                src="/images/couture_two_1772392277554.png" 
+                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
+                alt="Atelier Three" 
+              />
+            </div>
+            <div className="mt-8 text-right px-4">
+              <span className="font-montserrat text-[9px] text-[#C87D8A] tracking-[0.4em] mb-2 block">Creation III</span>
+              <p className="font-feminine text-white/50 text-sm">لمسة حرير تعانق تفاصيلكِ.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: The Final Quote & CTA ── */}
+      <section className="quote-section py-48 bg-[#0A0A0A] text-center px-6">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
+          <div className="w-[1px] h-20 bg-gradient-to-b from-[#D4AF37] to-transparent mb-16 opacity-50" />
+          
+          <h2 className="quote-text font-arabic text-4xl md:text-7xl text-[#D4AF37] leading-[1.4] md:leading-[1.2] mb-20 font-light drop-shadow-2xl">
             جودة لا تُرى بالعين فقط، <br className="hidden md:block"/>
             <span className="font-bold">بل تُشعر بالقلب.</span>
           </h2>
+
+          <div className="reveal-item">
+            <PulsingCTA href="/products" className="font-arabic min-w-[300px] text-lg">
+              استكشفي حكايتنا
+            </PulsingCTA>
+          </div>
         </div>
       </section>
 
-      {/* ── Section 4: The Invitation ── */}
-      <section className="py-32 bg-[#0A0A0A] flex flex-col items-center text-center px-6 reveal-item">
-        <h3 className="font-arabic text-3xl text-[#C87D8A] mb-12 opacity-80">هل أنتِ مستعدة لبدء حكايتكِ؟</h3>
-        <PulsingCTA href="/products" className="font-arabic min-w-[280px]">
-          استكشفي تشكيلتنا
-        </PulsingCTA>
-      </section>
+      {/* ── Footer Link ── */}
+      <div className="pb-24 text-center">
+        <Link href="/" className="inline-flex items-center gap-4 text-[#C87D8A]/50 hover:text-[#D4AF37] transition-all font-arabic text-xs tracking-[0.2em] group">
+          <ArrowLeft size={16} className="group-hover:-translate-x-2 transition-transform" />
+          <span>العودة للمعرض</span>
+        </Link>
+      </div>
 
     </main>
   );

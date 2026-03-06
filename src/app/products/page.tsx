@@ -43,14 +43,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
         {/* Category badge — shows on hover */}
         <div className="absolute top-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-          <span className="font-SHAGHAVArabic text-[9px] tracking-[0.15em] text-SHAGHAV-gold bg-black/60 backdrop-blur-sm border border-SHAGHAV-gold/30 px-3 py-1">
+          <span className="font-feminine text-[9px] tracking-[0.15em] text-SHAGHAV-gold bg-black/60 backdrop-blur-sm border border-SHAGHAV-gold/30 px-3 py-1">
             {product.subtitle}
           </span>
         </div>
 
         {/* CTA strip — slides up on hover */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent pt-8 pb-4 px-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-          <span className="font-SHAGHAVArabic text-[10px] tracking-[0.2em] text-white/70">
+          <span className="font-feminine text-[10px] tracking-[0.2em] text-white/70">
             استفسري عن القطعة ←
           </span>
         </div>
@@ -62,13 +62,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <h2 className="font-cormorant text-lg leading-snug text-white group-hover:text-SHAGHAV-gold/90 transition-colors duration-500">
             {product.title}
           </h2>
-          <p className="font-SHAGHAVArabic text-[10px] text-white/30 tracking-[0.1em] mt-0.5">
+          <p className="font-feminine text-[10px] text-white/30 tracking-[0.1em] mt-0.5">
             {product.subtitle}
           </p>
         </div>
         {/* Price – prominent gold pill */}
         <div className="flex-shrink-0 mt-0.5">
-          <span className="font-SHAGHAVArabic text-xs text-SHAGHAV-gold bg-[#4B1E28]/30 border border-[#D4AF37]/20 px-3 py-1 whitespace-nowrap">
+          <span className="font-feminine text-xs text-SHAGHAV-gold bg-[#4B1E28]/30 border border-[#D4AF37]/20 px-3 py-1 whitespace-nowrap">
             {product.price}
           </span>
         </div>
@@ -121,13 +121,13 @@ export default function ProductsPage() {
       {/* ── Page Header ── */}
       <div className="relative pt-28 pb-12 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,_rgba(75,30,40,0.3)_0%,_transparent_70%)] pointer-events-none" />
-        <span className="block font-SHAGHAVArabic text-[9px] tracking-[0.5em] text-[#C87D8A] mb-5 uppercase">
+        <span className="block font-feminine text-[9px] tracking-[0.5em] text-[#C87D8A] mb-5 uppercase">
           معرض شَغَف
         </span>
         <h1 className="font-cormorant font-semibold text-5xl md:text-7xl text-white tracking-wide">
           المُقتنيات
         </h1>
-        <p className="font-SHAGHAVArabic font-light text-xs text-white/35 tracking-[0.2em] mt-4 max-w-xs mx-auto leading-relaxed">
+        <p className="font-feminine font-light text-xs text-white/35 tracking-[0.2em] mt-4 max-w-xs mx-auto leading-relaxed">
           كل قطعة نسجناها لتصبح جزءاً من قصتكِ.
         </p>
         <div className="flex items-center justify-center gap-4 mt-8">
@@ -147,7 +147,7 @@ export default function ProductsPage() {
               const isActive = activeFilter === key;
               return (
                 <button key={key} onClick={() => changeFilter(key)}
-                  className={`relative flex-shrink-0 font-SHAGHAVArabic text-[11px] tracking-[0.12em] whitespace-nowrap px-5 py-4 transition-colors duration-500 ${isActive ? "text-SHAGHAV-gold" : "text-white/35 hover:text-white/65"}`}
+                  className={`relative flex-shrink-0 font-feminine text-[11px] tracking-[0.12em] whitespace-nowrap px-5 py-4 transition-colors duration-500 ${isActive ? "text-SHAGHAV-gold" : "text-white/35 hover:text-white/65"}`}
                 >
                   {label}
                   <span className={`absolute bottom-0 left-0 w-full h-[1px] bg-SHAGHAV-gold transition-transform duration-500 origin-right ${isActive ? "scale-x-100 origin-left" : "scale-x-0"}`} />
@@ -167,7 +167,7 @@ export default function ProductsPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="ابحثي عن قطعة..."
-                className="w-full bg-white/[0.04] border border-white/[0.08] text-white text-[11px] font-SHAGHAVArabic tracking-[0.1em] placeholder-white/25 pr-9 pl-4 py-2.5 outline-none focus:border-SHAGHAV-gold/40 transition-colors duration-300"
+                className="w-full bg-white/[0.04] border border-white/[0.08] text-white text-[11px] font-feminine tracking-[0.1em] placeholder-white/25 pr-9 pl-4 py-2.5 outline-none focus:border-SHAGHAV-gold/40 transition-colors duration-300"
               />
             </div>
 
@@ -205,7 +205,7 @@ export default function ProductsPage() {
             <p className="font-cormorant text-2xl text-white/20 tracking-wide mb-2">
               {query ? `لا نتائج لـ "${query}"` : "لا توجد قطع هنا"}
             </p>
-            <p className="font-SHAGHAVArabic text-[11px] text-white/20 tracking-[0.2em]">
+            <p className="font-feminine text-[11px] text-white/20 tracking-[0.2em]">
               جربي تصنيفاً آخر أو امسحي البحث
             </p>
           </div>
@@ -214,10 +214,10 @@ export default function ProductsPage() {
 
       {/* ── Footer ── */}
       <div className="border-t border-white/[0.05] py-10 text-center">
-        <p className="font-SHAGHAVArabic text-[9px] text-white/15 tracking-[0.35em]">
+        <p className="font-feminine text-[9px] text-white/15 tracking-[0.35em]">
           © شَغَف · كل قطعة تُروى قصتها بعنايةٍ واحترام
         </p>
-        <Link href="/" className="inline-block mt-3 font-SHAGHAVArabic text-[9px] tracking-[0.3em] text-white/25 hover:text-SHAGHAV-gold/50 transition-colors duration-500">
+        <Link href="/" className="inline-block mt-3 font-feminine text-[9px] tracking-[0.3em] text-white/25 hover:text-SHAGHAV-gold/50 transition-colors duration-500">
           ← العودة للمعرض
         </Link>
       </div>

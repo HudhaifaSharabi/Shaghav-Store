@@ -66,7 +66,7 @@ export default function Header() {
       <header ref={headerRef} className="fixed top-0 left-0 w-full z-[100] flex flex-col">
         {/* Announcement Bar */}
         <div className="w-full bg-[#4B1E28] py-3.5 flex justify-center items-center relative overflow-hidden border-b border-[#D4AF37]/20">
-          <p className="font-tajawal text-[#D4AF37] text-sm md:text-base tracking-[0.1em] uppercase leading-none font-medium text-center px-4">
+          <p className="font-feminine text-[#D4AF37] text-sm md:text-base tracking-[0.1em] uppercase leading-none font-medium text-center px-4">
             تكريماً لحضوركِ الطاغي.. نهديكِ الشحن المجاني لكل طلباتكِ بـ ١٠,٠٠٠ ريال فأكثر.
           </p>
         </div>

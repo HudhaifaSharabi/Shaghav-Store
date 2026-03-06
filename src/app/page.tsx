@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ShoppingBag, Menu, ArrowLeft, Gift, Wallet, Scissors } from "lucide-react";
+import { ALL_PRODUCTS } from "@/lib/products";
 import DiscountPopup from "@/components/DiscountPopup";
 import "./globals.css";
 
@@ -104,6 +105,7 @@ export default function Home() {
           x: () => {
              const trackWidth = trackRef.current ? trackRef.current.scrollWidth : 0;
              const viewportWidth = window.innerWidth;
+             // In RTL, we move the track to the right to see items on the left
              return (trackWidth - viewportWidth);
           },
           ease: "none",
@@ -117,6 +119,7 @@ export default function Home() {
             end: () => {
               const trackWidth = trackRef.current ? trackRef.current.scrollWidth : 0;
               const viewportWidth = window.innerWidth;
+              // Precise distance to scroll to reveal the last bit of the track
               return `+=${trackWidth - viewportWidth}`;
             },
             invalidateOnRefresh: true,
@@ -219,12 +222,12 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 text-center px-4">
-          <h1 ref={heroTitleRef} className="font-arabic text-5xl md:text-8xl font-bold text-[#D4AF37] mb-12 drop-shadow-2xl">
-            أناقة تسبق حضوركِ.
-          </h1>
-          <PulsingCTA href="/products" className="font-arabic">
-            اكتشفي المجموعات
-          </PulsingCTA>
+              <h1 ref={heroTitleRef} className="font-arabic text-5xl md:text-8xl font-bold text-[#D4AF37] mb-12 drop-shadow-2xl">
+                أناقة تسبق حضوركِ
+              </h1>
+              <PulsingCTA href="/products" className="font-arabic">
+                اكتشفي المجموعات
+              </PulsingCTA>
         </div>
         
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
@@ -249,7 +252,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-[#4B1E28] blur-[150px] opacity-20 pointer-events-none rounded-full" />
         
         <div className="relative z-10 max-w-4xl">
-           <span className="block font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#D4AF37]/30 mb-12">The Philosophy</span>
+           <span className="block font-feminine text-[10px] uppercase tracking-[0.8em] text-[#D4AF37]/30 mb-12">The Philosophy</span>
            <h2 ref={manifestoTextRef} className="font-arabic text-3xl md:text-6xl text-[#D4AF37] drop-shadow-xl leading-[1.6] max-w-4xl px-4 font-bold">
             الأنوثة ليست شكلاً.. بل أثرٌ يُترك في المكان.
           </h2>
@@ -267,26 +270,22 @@ export default function Home() {
         >
           {/* Headline Slide */}
           <div className="runway-item w-[60vw] md:w-[40vw] flex-shrink-0">
-            <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">The Selection</span>
+            <span className="block font-feminine text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">The Selection</span>
             <h2 className="font-cormorant text-6xl md:text-9xl text-white font-light lowercase">Trending<br/><span className="text-[#D4AF37] font-semibold italic">Pieces</span></h2>
           </div>
 
-          {[
-            { id: 1, title: "فستان السلطانة", price: "٤,٥٠٠ ر.س", img: "/images/sultana-dress.png" },
-            { id: 2, title: "وشاح الياقوت", price: "١,٢٠٠ ر.س", img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1000&auto=format&fit=crop" },
-            { id: 3, title: "رداء المخمل", price: "٣,٨٠٠ ر.س", img: "/images/velvet-robe.png" }
-          ].map((item) => (
-            <Link key={item.id} href={`/products/${item.id}`} className="runway-item group w-[75vw] md:w-[35vw] flex-shrink-0 will-change-transform">
+          {ALL_PRODUCTS.slice(0, 4).map((product) => (
+            <Link key={product.id} href={`/products/${product.id}`} className="runway-item group w-[75vw] md:w-[35vw] flex-shrink-0 will-change-transform">
               <div className="relative aspect-[3/4.5] md:aspect-[3/4] md:h-[80vh] rounded-t-[40vw] md:rounded-t-[20vw] overflow-hidden bg-[#111] mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
                 <img 
-                  src={item.img} 
-                  alt={item.title} 
+                  src={product.image} 
+                  alt={product.title} 
                   className="w-full h-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-8 right-8 flex flex-col items-end">
-                    <span className="font-arabic text-2xl text-white group-hover:text-[#D4AF37] transition-colors font-medium">{item.title}</span>
-                    <span className="font-montserrat text-xs text-[#D4AF37]/60 mt-2 tracking-[0.2em]">{item.price}</span>
+                    <span className="font-arabic text-2xl text-white group-hover:text-[#D4AF37] transition-colors font-medium">{product.title}</span>
+                    <span className="font-feminine text-xs text-[#D4AF37]/60 mt-2 tracking-[0.2em]">{product.price}</span>
                 </div>
               </div>
             </Link>
@@ -349,38 +348,42 @@ export default function Home() {
       {/* ── Section 5: Brand Promise ── */}
       <section className="brand-promise-section py-24 px-6 md:px-[10vw] bg-[#0A0A0A] border-t border-[#4B1E28]/30 relative z-10">
         <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-            
-            <div className="promise-item flex flex-col items-center text-center">
-              <div className="promise-icon pb-4">
-                <Gift size={44} strokeWidth={1.2} color="#D4AF37" />
-              </div>
-              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">تغليف فاخر كالهدايا</h4>
-              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">تصلكِ مقتنياتكِ في علبة مخملية تليق بمقامكِ.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-x-16 md:gap-y-24">
+          <div className="promise-item flex flex-col items-center">
+            <div className="promise-icon mb-6 p-4 bg-[#D4AF37]/5 rounded-full border border-[#D4AF37]/20">
+              <Gift className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
+            <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">تغليف يليق بكِ</h3>
+            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+              كل قطعة تصلكِ في صندوق مخملي مُعطر، لتكون لحظة فتحكِ للهدية ذكرى لا تُنسى.
+            </p>
+          </div>
 
-            <div className="promise-item flex flex-col items-center text-center">
-              <div className="promise-icon pb-4">
-                <Wallet size={44} strokeWidth={1.2} color="#D4AF37" />
-              </div>
-              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">دفع آمن عند الاستلام</h4>
-              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">راحتكِ أولويتنا، ادفعي نقداً أو بالبطاقة عند وصول طلبكِ.</p>
+          <div className="promise-item flex flex-col items-center">
+            <div className="promise-icon mb-6 p-4 bg-[#D4AF37]/5 rounded-full border border-[#D4AF37]/20">
+              <Wallet className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
+            <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">دفع آمن ومرن</h3>
+            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+              خيارات دفع متعددة تضمن لكِ الخصوصية والسهولة، مع خدمة الدفع عند الاستلام.
+            </p>
+          </div>
 
-            <div className="promise-item flex flex-col items-center text-center">
-              <div className="promise-icon pb-4">
-                <Scissors size={44} strokeWidth={1.2} color="#D4AF37" />
-              </div>
-              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">تفصيل على مقاسكِ</h4>
-              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">لأنكِ متفردة، نضمن لكِ خياطة تناسب تفاصيلكِ بدقة.</p>
+          <div className="promise-item flex flex-col items-center">
+            <div className="promise-icon mb-6 p-4 bg-[#D4AF37]/5 rounded-full border border-[#D4AF37]/20">
+              <Scissors className="text-[#D4AF37]" size={32} strokeWidth={1} />
             </div>
-
+            <h3 className="font-arabic text-xl text-[#D4AF37] mb-4">خياطة حسب القياس</h3>
+            <p className="font-feminine text-[#C87D8A] text-sm leading-relaxed max-w-[280px] opacity-80">
+              نوفر خدمة التعديل المجاني لضمان أن كل قطعة تعانق تفاصيلكِ بمنتهى الدقة.
+            </p>
+          </div>
           </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer className="py-24 bg-black border-t border-white/10 px-6 font-montserrat">
+      <footer className="py-24 bg-black border-t border-white/10 px-6 font-feminine">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="font-cormorant text-4xl text-[#D4AF37] tracking-[0.6em] mb-12 uppercase">SHAGHAV</h2>
           <div className="flex justify-center gap-12 mb-16">

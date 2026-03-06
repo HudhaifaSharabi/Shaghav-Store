@@ -7,25 +7,13 @@ import { Search, ChevronRight, ChevronLeft, ArrowLeft } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ALL_PRODUCTS } from "@/lib/products";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
-
-const MOCK_PRODUCTS = [
-  { id: 1, slug: "sultana-dress", title: "فستان السلطانة", price: "٤,٥٠٠ ر.س", category: "dresses", img: "/images/sultana-dress.png" },
-  { id: 2, slug: "velvet-robe", title: "رداء المخمل", price: "٣,٨٠٠ ر.س", category: "sleepwear", img: "/images/velvet-robe.png" },
-  { id: 3, slug: "ruby-scarf", title: "وشاح الياقوت", price: "١,٢٠٠ ر.س", category: "dresses", img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1000" },
-  { id: 4, slug: "silk-nightie", title: "قميص وسن", price: "٩٥٠ ر.س", category: "sleepwear", img: "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?w=1000" },
-  { id: 5, slug: "lace-lingerie", title: "طقم الدانتيل الفرنسي", price: "١,٨٠٠ ر.س", category: "lingerie", img: "/images/lingerie-category.png" },
-  { id: 6, slug: "evening-gown", title: "فستان السهرة الملكي", price: "٥,٢٠٠ ر.س", category: "dresses", img: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=1000" },
-  // More duplicates for pagination demo
-  { id: 7, slug: "d-7", title: "فستان الياسمين", price: "٣,١٠٠ ر.س", category: "dresses", img: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000" },
-  { id: 8, slug: "s-8", title: "رداء المسك", price: "٢,٧٠٠ ر.س", category: "sleepwear", img: "/images/luxury-sleepwear.png" },
-  { id: 9, slug: "l-9", title: "بادي الحرير", price: "٨٠٠ ر.س", category: "lingerie", img: "https://images.unsplash.com/photo-1582142407894-ec85a1260a46?w=1000" },
-];
+// MOCK_PRODUCTS removed in favor of ALL_PRODUCTS
 
 const CATEGORY_MAP: Record<string, { title: string; desc: string }> = {
   dresses: { title: "فساتين السهرة", desc: "تصاميم تعانق تفاصيلكِ لتبرز أنوثتكِ الطاغية بمزيج من الفخامة والعصرنة." },
@@ -50,16 +38,16 @@ export default function CollectionPage() {
 
   // Filter & Sort Logic
   const filteredProducts = useMemo(() => {
-    let result = MOCK_PRODUCTS.filter(p => p.category === categorySlug);
+    let result = ALL_PRODUCTS.filter(p => p.category === categorySlug);
     
     if (searchQuery) {
       result = result.filter(p => p.title.includes(searchQuery));
     }
 
     if (sortOption === "price-asc") {
-       result.sort((a, b) => parseInt(a.price.replace(/[^\d]/g, "")) - parseInt(b.price.replace(/[^\d]/g, "")));
+       result = [...result].sort((a, b) => a.priceNum - b.priceNum);
     } else if (sortOption === "price-desc") {
-       result.sort((a, b) => parseInt(b.price.replace(/[^\d]/g, "")) - parseInt(a.price.replace(/[^\d]/g, "")));
+       result = [...result].sort((a, b) => b.priceNum - a.priceNum);
     }
 
     return result;
@@ -133,10 +121,10 @@ export default function CollectionPage() {
         {currentItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12">
             {currentItems.map((product) => (
-              <Link key={product.id} href={`/products/${product.slug}`} className="product-card-reveal group block">
+              <Link key={product.id} href={`/products/${product.id}`} className="product-card-reveal group block">
                 <div className="relative aspect-[3/4.2] rounded-t-[20vw] md:rounded-t-[8vw] overflow-hidden bg-[#111] shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
                   <img 
-                    src={product.img} 
+                    src={product.image} 
                     alt={product.title} 
                     className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
                   />
@@ -144,7 +132,7 @@ export default function CollectionPage() {
                   
                   {/* Quick Add Overlay (Subtle) */}
                   <div className="absolute bottom-0 inset-x-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-black/40 backdrop-blur-sm border-t border-white/10 flex justify-center">
-                    <span className="font-tajawal text-[10px] text-[#D4AF37] tracking-[0.3em] uppercase">عرض المقتنية</span>
+                    <span className="font-feminine text-[10px] text-[#D4AF37] tracking-[0.3em] uppercase">عرض المقتنية</span>
                   </div>
                 </div>
                 
@@ -154,7 +142,7 @@ export default function CollectionPage() {
                   </h3>
                   <div className="flex items-center justify-center md:justify-start gap-4 mt-3">
                     <div className="h-px w-8 bg-[#4B1E28]/40" />
-                    <span className="font-montserrat text-white/50 text-sm tracking-widest">{product.price}</span>
+                    <span className="font-feminine text-white/50 text-sm tracking-widest">{product.price}</span>
                   </div>
                 </div>
               </Link>
