@@ -19,21 +19,12 @@ export interface CartItem {
 
 // ─── Store Interface ───────────────────────────────────────────────────────────
 
-interface AppState {
-  // Access / lobby flags
-  isInvited: boolean;
-  inviteCode: string | null;
-  hasVisitedLobby: boolean;
-  hasLetterBeenRead: boolean;
+// ─── Store Interface ───────────────────────────────────────────────────────────
 
+interface AppState {
   // Cart
   cart: CartItem[];
   cartCount: () => number;       // derived — total quantity across all items
-
-  // Access actions
-  setInvited: (invited: boolean, code?: string | null) => void;
-  setHasVisitedLobby: (visited: boolean) => void;
-  setHasLetterBeenRead: (read: boolean) => void;
 
   // Cart actions
   addToCart: (item: Omit<CartItem, "cartId" | "quantity"> & { quantity?: number }) => void;
@@ -48,24 +39,10 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       // ── Defaults ──
-      isInvited: false,
-      inviteCode: null,
-      hasVisitedLobby: false,
-      hasLetterBeenRead: false,
       cart: [],
 
       // ── Derived ──
       cartCount: () => get().cart.reduce((sum, item) => sum + item.quantity, 0),
-
-      // ── Access actions ──
-      setInvited: (invited, code = null) =>
-        set({ isInvited: invited, inviteCode: code }),
-
-      setHasVisitedLobby: (visited) =>
-        set({ hasVisitedLobby: visited }),
-
-      setHasLetterBeenRead: (read) =>
-        set({ hasLetterBeenRead: read }),
 
       // ── Cart actions ──
       addToCart: (item) => {
@@ -117,7 +94,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "SHAGHAV-storage",   // localStorage key
-      version: 2,               // bump version to flush old cart shape
+      version: 3,               // bump version to flush old access flags
     }
   )
 );

@@ -217,7 +217,7 @@ export default function ProductsPage() {
         <p className="font-SHAGHAVArabic text-[9px] text-white/15 tracking-[0.35em]">
           © شَغَف · كل قطعة تُروى قصتها بعنايةٍ واحترام
         </p>
-        <Link href="/lobby" className="inline-block mt-3 font-SHAGHAVArabic text-[9px] tracking-[0.3em] text-white/25 hover:text-SHAGHAV-gold/50 transition-colors duration-500">
+        <Link href="/" className="inline-block mt-3 font-SHAGHAVArabic text-[9px] tracking-[0.3em] text-white/25 hover:text-SHAGHAV-gold/50 transition-colors duration-500">
           ← العودة للمعرض
         </Link>
       </div>

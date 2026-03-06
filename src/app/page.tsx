@@ -1,386 +1,408 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRef, useEffect } from "react";
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-import { useAppStore } from "@/store/useAppStore";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ShoppingBag, Menu, ArrowLeft, Gift, Wallet, Scissors } from "lucide-react";
+import DiscountPopup from "@/components/DiscountPopup";
+import "./globals.css";
 
-type FormState = "invite" | "waitlist" | "success";
-type AccessStatus = "idle" | "error" | "success";
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+// ─── Shared Components ──────────────────────────────────────────────────────────
+
+function PulsingCTA({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+  return (
+    <Link 
+      href={href}
+      className={`group relative inline-flex items-center justify-center px-8 py-4 bg-[#4B1E28]/40 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-bold text-xs tracking-[0.2em] uppercase transition-all duration-500 animate-[pulse_3s_ease-in-out_infinite] ${className}`}
+    >
+      <span className="relative z-10">{children}</span>
+    </Link>
+  );
+}
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const passageRef = useRef<HTMLDivElement>(null); // For the success access passage text
-  const overlayRef = useRef<HTMLDivElement>(null); // To animate background fade to black
-  
-  const router = useRouter();
-  const isInvited = useAppStore((state) => state.isInvited);
-  const hasVisitedLobby = useAppStore((state) => state.hasVisitedLobby);
-  const setInvited = useAppStore((state) => state.setInvited);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const runwayRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const manifestoTextRef = useRef<HTMLHeadingElement>(null);
+  const categorySectionRef = useRef<HTMLElement>(null);
 
-  // All state — must be declared before any conditional returns
-  const formWrapperRef = useRef<HTMLDivElement>(null);
-  const inviteFormRef = useRef<HTMLDivElement>(null);
-  const waitlistFormRef = useRef<HTMLFormElement>(null);
-  const successMsgRef = useRef<HTMLDivElement>(null);
-  const errorMsgRef = useRef<HTMLParagraphElement>(null);
+  useGSAP(() => {
+    // 0. Initial Hero Entrance (Burgundy Fade)
+    gsap.fromTo(".hero-overlay",
+      { backgroundColor: "#4B1E28", opacity: 1 },
+      { backgroundColor: "rgba(10, 10, 10, 0.4)", duration: 2, ease: "expo.inOut" }
+    );
 
-  const [formState, setFormState] = useState<FormState>("invite");
-  const [accessStatus, setAccessStatus] = useState<AccessStatus>("idle");
-  const [isFocused, setIsFocused] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [inviteCode, setInviteCode] = useState("");
-  const [mounted, setMounted] = useState(false);
-
-  // Hydration guard — Zustand reads localStorage only after mount
-  useEffect(() => setMounted(true), []);
-
-  // Redirect if already invited
-  useEffect(() => {
-    if (mounted && isInvited) {
-      router.replace(hasVisitedLobby ? '/products' : '/lobby');
-    }
-  }, [mounted, isInvited, hasVisitedLobby, router]);
-
-  const { contextSafe } = useGSAP(
-    () => {
-      if (!logoRef.current || !containerRef.current) return;
-
-      // Initial mount animation (Timeline for sequential slow fade-up)
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        logoRef.current,
+    // 1. Hero Title Word Animation (Refined)
+    if (heroTitleRef.current) {
+      const text = heroTitleRef.current.innerText;
+      heroTitleRef.current.innerHTML = text.split(" ").map(word => `<span class="hero-word opacity-0 inline-block">${word}</span>`).join(" ");
+      
+      gsap.fromTo(".hero-word", 
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }
-      );
-
-      if (subtitleRef.current) {
-        tl.fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
-          "-=1.0"
-        );
-      }
-
-      if (inviteFormRef.current) {
-        tl.fromTo(
-          inviteFormRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" },
-          "-=1.0"
-        );
-      }
-        
-      // Ensure other forms are hidden initially
-      const hiddenTargets = [waitlistFormRef.current, successMsgRef.current].filter(Boolean);
-      if (hiddenTargets.length > 0) {
-        gsap.set(hiddenTargets, { 
-          autoAlpha: 0, 
-          display: "none",
-          x: 30 
-        });
-      }
-    },
-    { scope: containerRef, dependencies: [mounted] }
-  );
-
-  // Safe transition function for GSAP 
-  const transitionTo = contextSafe((newState: FormState) => {
-    const currentRef = 
-      formState === "invite" ? inviteFormRef.current : 
-      formState === "waitlist" ? waitlistFormRef.current : 
-      successMsgRef.current;
-      
-    const nextRef = 
-      newState === "invite" ? inviteFormRef.current : 
-      newState === "waitlist" ? waitlistFormRef.current : 
-      successMsgRef.current;
-
-    const tl = gsap.timeline({
-      onComplete: () => setFormState(newState)
-    });
-
-    // Slide out current staggered
-    tl.to(currentRef, {
-      opacity: 0,
-      x: -30,
-      duration: 0.6,
-      ease: "power3.inOut",
-      onComplete: () => { gsap.set(currentRef, { display: "none" }); }
-    })
-    // Slide in next staggered
-    .set(nextRef, { display: "flex", x: 30 })
-    .to(nextRef, {
-      opacity: 1,
-      x: 0,
-      autoAlpha: 1,
-      duration: 0.8,
-      ease: "power3.out"
-    });
-  });
-
-  const handleWaitlistSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Basic international phone validation regex
-    const phoneRegex = /^\+?[1-9]\d{1,14}$/;
-    if (phoneRegex.test(phone.replace(/\s+/g, ''))) {
-      transitionTo("success");
-    } else {
-      // Optional: Handle error state here, for now simple alert or styling could be added
-      alert("يرجى إدخال رقم هاتف صحيح بالصيغة الدولية");
-    }
-  };
-
-  const handleAccess = contextSafe((e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    
-    if (inviteCode.trim().toUpperCase() === "VIP2026") {
-      setAccessStatus("success");
-      setInvited(true, inviteCode.trim().toUpperCase());
-      
-      const tl = gsap.timeline();
-      
-      // The Passage Ritual Timeline
-      tl.to(inviteFormRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.inOut",
-        onComplete: () => {
-          gsap.set(inviteFormRef.current, { display: "none" });
-          gsap.set(passageRef.current, { display: "block" });
+        { 
+          opacity: 1, 
+          y: 0, 
+          stagger: 0.15, 
+          duration: 1.2, 
+          ease: "power3.out", 
+          delay: 0.2 
         }
-      })
-      .to(overlayRef.current, {
-        backgroundColor: "rgba(0, 0, 0, 1)",
-        duration: 2,
-        ease: "power3.inOut"
-      }, "+=0.2")
-      .fromTo(passageRef.current, 
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1.05, duration: 2.5, ease: "power3.out", onComplete: () => {
-          setTimeout(() => {
-            if (hasVisitedLobby) {
-              router.push('/products'); // Returning visitor goes straight to products
-            } else {
-              router.push('/lobby'); // First-time visitor gets the cinematic lobby
-            }
-          }, 1000);
-        } },
-        "-=1.5"
       );
-      
-    } else {
-      setAccessStatus("error");
-      // Quiet Refusal Animation (Elegant slow pan)
-      gsap.fromTo(errorMsgRef.current, 
-        { opacity: 0, x: 10 },
-        { opacity: 0.8, x: 0, duration: 0.8, ease: "sine.inOut" }
-      );
-      
-      // Optional: hide error after a few seconds
-      setTimeout(() => {
-        if(errorMsgRef.current) gsap.to(errorMsgRef.current, { opacity: 0, duration: 1 });
-      }, 4000);
     }
-  });
 
-  // If not yet hydrated or already invited (redirect in progress) — render nothing
-  if (!mounted || isInvited) return null;
+
+    // 3. Manifesto Word Animation (Scrubbed with Scroll)
+    if (manifestoTextRef.current) {
+      const words = manifestoTextRef.current.innerText.split(" ");
+      manifestoTextRef.current.innerHTML = words.map(word => `<span class="manifesto-word inline-block opacity-0">${word}</span>`).join(" ");
+
+      gsap.to(".manifesto-word", {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".manifesto-section",
+          start: "top 80%",
+          end: "bottom 60%",
+          scrub: 1,
+        },
+        startAt: { y: 20 }
+      });
+    }
+
+    // SVG Line-art Animation
+    if (pathRef.current) {
+      const length = pathRef.current.getTotalLength();
+      gsap.set(pathRef.current, { strokeDasharray: length, strokeDashoffset: length });
+      
+      gsap.to(pathRef.current, {
+        strokeDashoffset: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".manifesto-section",
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: 1.5,
+        }
+      });
+    }
+
+    // 4. Horizontal Runway (PRECISION SCROLL)
+    if (trackRef.current && runwayRef.current) {
+        gsap.to(trackRef.current, {
+          x: () => {
+             const trackWidth = trackRef.current ? trackRef.current.scrollWidth : 0;
+             const viewportWidth = window.innerWidth;
+             return (trackWidth - viewportWidth);
+          },
+          ease: "none",
+          force3D: true,
+          scrollTrigger: {
+            trigger: runwayRef.current,
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1,
+            start: "top top",
+            end: () => {
+              const trackWidth = trackRef.current ? trackRef.current.scrollWidth : 0;
+              const viewportWidth = window.innerWidth;
+              return `+=${trackWidth - viewportWidth}`;
+            },
+            invalidateOnRefresh: true,
+          }
+        });
+    }
+
+    // 5. Immersive Background Transition for Categories
+    if (categorySectionRef.current) {
+      gsap.to(categorySectionRef.current, {
+        backgroundColor: "#4B1E28",
+        ease: "none",
+        scrollTrigger: {
+          trigger: categorySectionRef.current,
+          start: "top 40%",
+          end: "bottom 60%",
+          scrub: true,
+          toggleActions: "play reverse play reverse"
+        }
+      });
+    }
+
+    // 6. Asymmetric Grid Stagger (Refined with Curtain Reveal)
+    const cards = gsap.utils.toArray<HTMLElement>('.category-card');
+    cards.forEach((card) => {
+      const img = card.querySelector('.category-image');
+      const text = card.querySelector('.category-text');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: "top 95%", // Revealing much earlier
+          toggleActions: "play none none reverse",
+        }
+      });
+
+      // 1. The Curtain Reveal (Clip-Path)
+      tl.fromTo(card, 
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }, 
+        { clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)", duration: 1.5, ease: "power4.inOut" }
+      )
+      // 2. The Subtle Image Parallax
+      .fromTo(img, 
+        { y: "-15%", scale: 1.1 }, 
+        { y: "0%", scale: 1, duration: 1.5, ease: "power3.out" }, 
+        "-=1.2"
+      )
+      // 3. The Text Reveal
+      .fromTo(text, 
+        { y: 40, opacity: 0, filter: "blur(10px)" }, 
+        { y: 0, opacity: 1, filter: "blur(0px)", duration: 1, ease: "power2.out" }, 
+        "-=1"
+      );
+    });
+
+    // 7. Brand Promise Animation
+    gsap.fromTo(".promise-item", 
+      { opacity: 0, y: 50, filter: 'blur(10px)' },
+      { 
+        opacity: 1, 
+        y: 0, 
+        filter: 'blur(0px)', 
+        duration: 1.2, 
+        stagger: 0.2, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".brand-promise-section",
+          start: "top bottom-=50px", // Trigger almost immediately on entry
+        }
+      }
+    );
+
+    // Micro-interaction: Floating Icons
+    gsap.to(".promise-icon", {
+      y: -10,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+  }, { scope: mainRef });
 
   return (
-    <main
-      ref={containerRef}
-      className="relative flex h-[100dvh] w-full flex-col items-center justify-center bg-SHAGHAV-black overflow-hidden"
-    >
-      {/* Video Backgrounds */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover opacity-60 hidden md:block"
-        src="/videos/SHAGHAV-gate-desktop.mp4"
-      />
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover opacity-60 md:hidden"
-        src="/videos/SHAGHAV-gate-mobile.mp4"
-      />
+    <main ref={mainRef} className="bg-[#0A0A0A] selection:bg-[#D4AF37] selection:text-black overflow-x-hidden" dir="rtl">
+      
 
-      {/* Dark Gradient Overlay */}
-      <div 
-        ref={overlayRef}
-        className="absolute inset-0 bg-gradient-to-b from-SHAGHAV-black/90 via-SHAGHAV-black/40 to-SHAGHAV-black/90 pointer-events-none transition-colors duration-1000" 
-      />
-
-      {/* Frost Glass Content Container */}
-      <div className="relative z-10 flex w-[90%] max-w-lg flex-col items-center justify-center rounded-2xl p-8 text-center backdrop-blur-sm bg-black/10 shadow-2xl border border-white/5">
-        
-        {/* Main Logo & Text */}
-        <div ref={logoRef} className="flex flex-col items-center opacity-0 drop-shadow-md">
-          <Image
-            src="/logo.png"
-            alt="SHAGHAV Logo"
-            width={160}
-            height={160}
-            className="mb-6 h-40 w-auto object-contain md:h-40 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+      {/* ── Section 1: Cinematic Hero ── */}
+      <section className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover scale-[1.02]"
+            src="/videos/SHAGHAV-gate-desktop.mp4"
           />
-          <h1 className="font-cormorant text-5xl font-semibold uppercase tracking-[0.2em] text-SHAGHAV-gold md:text-6xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-            SHAGHAV
+          <div className="hero-overlay absolute inset-0 bg-[#4B1E28]" />
+        </div>
+
+        <div className="relative z-10 text-center px-4">
+          <h1 ref={heroTitleRef} className="font-arabic text-5xl md:text-8xl font-bold text-[#D4AF37] mb-12 drop-shadow-2xl">
+            أناقة تسبق حضوركِ.
           </h1>
+          <PulsingCTA href="/products" className="font-arabic">
+            اكتشفي المجموعات
+          </PulsingCTA>
         </div>
+        
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+          <div className="w-[1px] h-16 bg-gradient-to-b from-[#D4AF37]/50 to-transparent" />
+        </div>
+      </section>
 
-        {/* Sub-headline (Arabic) */}
-        <p
-          ref={subtitleRef}
-          className="mb-10 mt-6 font-montserrat text-base font-medium uppercase tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] opacity-0 md:text-lg"
-        >
-          للحضورِ سَطوة، وللشغفِ عنوان
-        </p>
-
-        {/* Forms Wrapper - Keeps layout stable during transitions */}
-        <div ref={formWrapperRef} className="relative w-full min-h-[140px] flex justify-center">
-          
-          <div ref={inviteFormRef} className="absolute flex w-[95%] sm:w-[85%] flex-col items-center mx-auto text-center">
-            <p className="mb-5 font-montserrat text-xs tracking-[0.2em] text-white/70 drop-shadow-md">
-              دخولٌ مقتصرٌ على أصحابِ الدعواتِ المسبقة.
-            </p>
-
-            <div className="relative w-full mb-6 relative">
-              <input
-                type="text"
-                value={inviteCode}
-                onChange={(e) => {
-                   setInviteCode(e.target.value);
-                   if (accessStatus === "error") setAccessStatus("idle"); // reset error if typing
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && inviteCode.length > 0) {
-                    handleAccess();
-                  }
-                }}
-                placeholder="أدخل رمز الدعوة.."
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                className={`w-full bg-transparent py-3 text-center font-montserrat text-base tracking-widest text-white outline-none border-b drop-shadow-sm transition-colors duration-500 placeholder:text-white/30 ${
-                  isFocused ? "border-SHAGHAV-gold" : "border-SHAGHAV-gold/30"
-                }`}
-              />
-              
-              {/* Help Text / Error Text */}
-              <p
-                ref={errorMsgRef}
-                className={`absolute -bottom-6 left-0 right-0 text-center font-montserrat tracking-widest transition-opacity duration-700 pointer-events-none ${
-                  accessStatus === "error" 
-                    ? "text-SHAGHAV-burgundy text-xs opacity-80" 
-                    : `text-white/50 text-[10px] ${isFocused ? "opacity-100" : "opacity-0"}`
-                }`}
-              >
-                {accessStatus === "error" 
-                  ? "نعتذر.. هذا الرمز لا يمنحُ حقَّ العبور." 
-                  : "يرجى التأكد من صحة رمز الدعوة الخاص بك"
-                }
-              </p>
-            </div>
-
-            {/* Enter Button (Appears only when typing) */}
-            <div className={`transition-all duration-500 overflow-hidden w-full ${inviteCode.length > 0 && accessStatus !== "success" ? "h-12 opacity-100 mb-2 mt-2" : "h-0 opacity-0 mb-0 mt-0"}`}>
-               <button 
-                  type="button"
-                  onClick={(e) => handleAccess(e)}
-                  className="w-full max-w-[200px] rounded-full bg-SHAGHAV-gold py-2.5 text-xs font-semibold tracking-widest text-dark hover:bg-[#E5C158] transition-colors duration-300 shadow-[0_0_15px_rgba(212,175,55,0.3)] font-montserrat text-black mx-auto"
-                >
-                  دخول
-                </button>
-            </div>
-            
-            <button 
-              onClick={() => transitionTo("waitlist")}
-              className="mt-4 text-[10px] uppercase tracking-widest text-white/40 hover:text-SHAGHAV-gold transition-colors duration-300 font-montserrat font-medium"
-            >
-              لا تملك رمزاً؟ اطلب حق الانضمام
-            </button>
-          </div>
-
-          {/* 2. Waitlist Form */}
-          <form
-            ref={waitlistFormRef}
-            onSubmit={handleWaitlistSubmit}
-            className="absolute flex w-[95%] sm:w-[85%] flex-col items-center opacity-0 invisible mx-auto"
-          >
-             <p className="mb-5 font-montserrat text-xs tracking-[0.2em] text-white/70 drop-shadow-md">
-              سجل اهتمامك للانضمام إلى النخبة.
-            </p>
-
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="أدخل رقم الهاتف (WhatsApp).."
-              dir="rtl"
-              className="w-full bg-transparent py-3 text-center font-montserrat text-sm tracking-widest text-white outline-none border-b border-SHAGHAV-gold/40 focus:border-SHAGHAV-gold transition-colors duration-500 placeholder:text-white/30 mb-8"
-              required
+      {/* ── Section 2: The Manifesto ── */}
+      <section className="manifesto-section min-h-[100vh] bg-gradient-to-b from-[#0A0A0A] via-[#4B1E28]/15 to-[#0A0A0A] flex flex-col items-center justify-center text-center px-6 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-20 flex items-center justify-center">
+          <svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[80vw] h-auto">
+            <path 
+              ref={pathRef}
+              d="M10 200C150 50 350 350 400 200C450 50 650 350 790 200" 
+              stroke="#D4AF37" 
+              strokeWidth="1" 
+              strokeLinecap="round"
             />
-            
-            <button 
-              type="submit"
-              className="w-full max-w-[200px] rounded-full bg-SHAGHAV-gold py-3 text-xs font-semibold tracking-widest text-SHAGHAV-black hover:bg-[#E5C158] transition-colors duration-300 shadow-[0_0_15px_rgba(212,175,55,0.3)] font-montserrat"
-            >
-              إرسال الطلب
-            </button>
-
-            <button 
-              type="button"
-              onClick={() => transitionTo("invite")}
-              className="mt-6 text-[10px] uppercase tracking-widest text-white/40 hover:text-white/80 transition-colors duration-300 font-montserrat"
-            >
-              العودة لإدخال الرمز
-            </button>
-          </form>
-
-          {/* 3. Success Message */}
-          <div
-            ref={successMsgRef}
-            className="absolute flex w-[95%] sm:w-[85%] flex-col items-center justify-center opacity-0 invisible h-full mx-auto"
-          >
-            <div className="w-12 h-12 rounded-full border border-SHAGHAV-gold flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-              <span className="text-SHAGHAV-gold text-xl">✓</span>
-            </div>
-            <p className="text-center font-montserrat text-sm leading-relaxed tracking-widest text-white/90 drop-shadow-md">
-              تم تسجيل طلبك.
-              <br/>
-              <span className="text-[11px] text-white/60 mt-3 block leading-loose">
-                سيتم إرسال دعوة خاصة لك عبر الواتساب فور توفرها.
-              </span>
-            </p>
-          </div>
-
-          {/* 4. Access Granted Message (Passage Ritual) */}
-          <div
-            ref={passageRef}
-            className="absolute flex w-full flex-col items-center justify-center opacity-0 hidden mx-auto min-h-[140px]"
-          >
-            <p className="text-center font-cormorant font-semibold text-xl md:text-2xl leading-relaxed tracking-[0.2em] text-SHAGHAV-gold drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-              تم تأكيد الاستحقاق..<br/>تُفتح الأبواب.
-            </p>
-          </div>
-
+          </svg>
         </div>
-      </div>
-      <footer className="absolute bottom-8 z-10 text-center pointer-events-none">
-        <p className="font-montserrat text-[9px] uppercase tracking-[0.5em] text-white/30 drop-shadow-md">
-          Shaghav Store — All Rights Reserved 2026
-        </p>
+        
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-[#4B1E28] blur-[150px] opacity-20 pointer-events-none rounded-full" />
+        
+        <div className="relative z-10 max-w-4xl">
+           <span className="block font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#D4AF37]/30 mb-12">The Philosophy</span>
+           <h2 ref={manifestoTextRef} className="font-arabic text-3xl md:text-6xl text-[#D4AF37] drop-shadow-xl leading-[1.6] max-w-4xl px-4 font-bold">
+            الأنوثة ليست شكلاً.. بل أثرٌ يُترك في المكان.
+          </h2>
+          <div className="mt-16 text-[#C87D8A]/50 font-arabic text-sm tracking-widest italic">
+            جوهر يتخطى الحدود
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 3: The Horizontal Runway ── */}
+      <section ref={runwayRef} id="runway-container" className="h-[100dvh] w-full overflow-hidden bg-[#0A0A0A] border-y border-white/5 relative z-10">
+        <div 
+          ref={trackRef} 
+          className="flex h-full md:pt-[12vh] items-center px-6 md:px-[10vw] gap-16 md:gap-40 w-max will-change-transform"
+        >
+          {/* Headline Slide */}
+          <div className="runway-item w-[60vw] md:w-[40vw] flex-shrink-0">
+            <span className="font-montserrat text-[10px] uppercase tracking-[0.8em] text-[#C87D8A] mb-4 block">The Selection</span>
+            <h2 className="font-cormorant text-6xl md:text-9xl text-white font-light lowercase">Trending<br/><span className="text-[#D4AF37] font-semibold italic">Pieces</span></h2>
+          </div>
+
+          {[
+            { id: 1, title: "فستان السلطانة", price: "٤,٥٠٠ ر.س", img: "/images/sultana-dress.png" },
+            { id: 2, title: "وشاح الياقوت", price: "١,٢٠٠ ر.س", img: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1000&auto=format&fit=crop" },
+            { id: 3, title: "رداء المخمل", price: "٣,٨٠٠ ر.س", img: "/images/velvet-robe.png" }
+          ].map((item) => (
+            <Link key={item.id} href={`/products/${item.id}`} className="runway-item group w-[75vw] md:w-[35vw] flex-shrink-0 will-change-transform">
+              <div className="relative aspect-[3/4.5] md:aspect-[3/4] md:h-[80vh] rounded-t-[40vw] md:rounded-t-[20vw] overflow-hidden bg-[#111] mb-8 shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-8 right-8 flex flex-col items-end">
+                    <span className="font-arabic text-2xl text-white group-hover:text-[#D4AF37] transition-colors font-medium">{item.title}</span>
+                    <span className="font-montserrat text-xs text-[#D4AF37]/60 mt-2 tracking-[0.2em]">{item.price}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+
+          <div className="runway-item w-[50vw] flex-shrink-0 flex flex-col items-center justify-center">
+            <PulsingCTA href="/products" className="font-arabic">تصفحي المجموعات</PulsingCTA>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 4: Asymmetric Category Portals ── */}
+      <section ref={categorySectionRef} className="categories-section py-40 px-6 md:px-[15vw] relative bg-[#0A0A0A] z-10 transition-colors duration-500">
+        <div className="max-w-screen-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-32 gap-x-12">
+            
+            <div className="flex flex-col items-start">
+               <div className="category-card overflow-hidden relative group rounded-t-[20vw] aspect-[3/4] w-full mb-8">
+                  <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
+                    <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000" className="object-cover w-full h-full" alt="Evening Dresses" />
+                  </div>
+                  <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
+                    <h3 className="font-arabic text-3xl md:text-5xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">فساتين السهرة</h3>
+                  </div>
+                  <Link href="/collections/dresses" className="absolute inset-0 z-20" />
+               </div>
+               <p className="font-arabic text-sm text-[#C87D8A]/60 italic tracking-[0.1em] pr-4">فستان ما في منه اثنين</p>
+            </div>
+
+            <div className="flex flex-col items-end md:mt-20">
+               <div className="category-card overflow-hidden relative group rounded-t-[20vw] aspect-[3/4] w-full md:w-[85%] mb-8">
+                  <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
+                    <img src="/images/luxury-sleepwear.png" className="object-cover w-full h-full" alt="Luxury Sleepwear" />
+                  </div>
+                  <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
+                    <h3 className="font-arabic text-3xl md:text-5xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">ملابس النوم</h3>
+                  </div>
+                  <Link href="/collections/sleepwear" className="absolute inset-0 z-20" />
+               </div>
+               <p className="font-arabic text-sm text-[#C87D8A]/60 italic tracking-[0.1em] pl-4 text-right">نعومة تلامس خيالكِ</p>
+            </div>
+
+            <div className="md:col-span-2 flex flex-col items-center md:pt-40">
+               <div className="category-card overflow-hidden relative group rounded-t-[200px] aspect-[16/9] w-full md:w-[85%] mb-8">
+                  <div className="category-image w-full h-[120%] absolute -top-[10%] left-0">
+                    <img src="/images/lingerie-category.png" className="object-cover w-full h-full font-bold" alt="Lingerie Collection" />
+                  </div>
+                  <div className="category-text absolute inset-0 flex items-center justify-center z-10 px-4">
+                    <h3 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] text-center font-bold">اللانجري</h3>
+                  </div>
+                  <Link href="/collections/lingerie" className="absolute inset-0 z-20" />
+               </div>
+               <p className="font-arabic text-sm text-[#C87D8A]/60 italic tracking-[0.1em]">ثقة لا تحتاج لبرهان</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Section 5: Brand Promise ── */}
+      <section className="brand-promise-section py-24 px-6 md:px-[10vw] bg-[#0A0A0A] border-t border-[#4B1E28]/30 relative z-10">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
+            
+            <div className="promise-item flex flex-col items-center text-center">
+              <div className="promise-icon pb-4">
+                <Gift size={44} strokeWidth={1.2} color="#D4AF37" />
+              </div>
+              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">تغليف فاخر كالهدايا</h4>
+              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">تصلكِ مقتنياتكِ في علبة مخملية تليق بمقامكِ.</p>
+            </div>
+
+            <div className="promise-item flex flex-col items-center text-center">
+              <div className="promise-icon pb-4">
+                <Wallet size={44} strokeWidth={1.2} color="#D4AF37" />
+              </div>
+              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">دفع آمن عند الاستلام</h4>
+              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">راحتكِ أولويتنا، ادفعي نقداً أو بالبطاقة عند وصول طلبكِ.</p>
+            </div>
+
+            <div className="promise-item flex flex-col items-center text-center">
+              <div className="promise-icon pb-4">
+                <Scissors size={44} strokeWidth={1.2} color="#D4AF37" />
+              </div>
+              <h4 className="font-arabic text-[#D4AF37] text-2xl mt-6 mb-3 font-medium">تفصيل على مقاسكِ</h4>
+              <p className="font-tajawal text-[#C87D8A] text-sm tracking-wide leading-relaxed">لأنكِ متفردة، نضمن لكِ خياطة تناسب تفاصيلكِ بدقة.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="py-24 bg-black border-t border-white/10 px-6 font-montserrat">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="font-cormorant text-4xl text-[#D4AF37] tracking-[0.6em] mb-12 uppercase">SHAGHAV</h2>
+          <div className="flex justify-center gap-12 mb-16">
+            <Link href="/products" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Products</Link>
+            <Link href="/" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Philosophy</Link>
+            <Link href="/" className="text-[10px] uppercase tracking-[0.3em] text-white/40 hover:text-white transition-colors">Contact</Link>
+          </div>
+          <p className="font-arabic text-[11px] text-white/20 tracking-[0.4em] mb-4">كافة الحقوق محفوظة ٢٠٢٦</p>
+          <div className="w-16 h-[1px] bg-white/5 mx-auto" />
+        </div>
       </footer>
+
+      <style jsx global>{`
+        body { overflow-x: hidden; background: #0A0A0A; }
+        .will-change-transform { will-change: transform; }
+        @keyframes pulse {
+          0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+          50% { transform: scale(1.02); box-shadow: 0 0 25px 8px rgba(212, 175, 55, 0.1); }
+          100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+      `}</style>
+      <DiscountPopup />
     </main>
   );
 }

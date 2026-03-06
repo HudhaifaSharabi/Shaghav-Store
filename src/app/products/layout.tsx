@@ -29,74 +29,17 @@ export default function ProductsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <>
-      {/* ── Luxury Navbar ── */}
-      <header className="fixed top-0 w-full z-50 bg-[#0A0A0A]/80 backdrop-blur-md border-b border-[#D4AF37]/20 flex justify-between items-center px-6 md:px-10 py-4">
-        {/* Left: Hamburger + Lobby link */}
-        <div className="flex items-center gap-5">
-          <button
-            aria-label="القائمة"
-            className="flex flex-col gap-[5px] group cursor-pointer"
-          >
-            <span className="block w-6 h-[1px] bg-[#D4AF37]/60 group-hover:bg-[#D4AF37] transition-colors duration-300" />
-            <span className="block w-4 h-[1px] bg-[#D4AF37]/60 group-hover:bg-[#D4AF37] transition-colors duration-300 group-hover:w-6" />
-            <span className="block w-6 h-[1px] bg-[#D4AF37]/60 group-hover:bg-[#D4AF37] transition-colors duration-300" />
-          </button>
-          <Link
-            href="/lobby"
-            className="hidden sm:block font-SHAGHAVArabic text-[10px] tracking-[0.25em] text-[#D4AF37]/40 hover:text-[#D4AF37]/80 transition-colors duration-500"
-          >
-            المعرض
-          </Link>
-        </div>
-
-        {/* Center: Logo */}
-        <Link
-          href="/products"
-          className="font-cormorant font-semibold text-xl tracking-[0.35em] text-[#D4AF37] hover:text-white transition-colors duration-500 select-none"
-        >
-          SHAGHAV
-        </Link>
-
-        {/* Right: Shopping Bag — opens CartDrawer */}
-        <button
-          id="cart-icon"
-          onClick={() => setIsCartOpen(true)}
-          aria-label="حقيبة التسوق"
-          className="relative group cursor-pointer"
-        >
-          <svg
-            className="w-5 h-5 text-[#D4AF37]/60 group-hover:text-[#D4AF37] transition-colors duration-300"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"
-            />
-          </svg>
-          {/* Item count badge (Hydrated) */}
-          <CartBadge />
-        </button>
-      </header>
-
-      {/* ── Cart Drawer ── */}
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-
       {/* ── Main Content ── */}
-      <div className="pt-[61px]">{children}</div>
+      <div className="pt-[140px]">{children}</div>
 
       {/* ── Luxury Footer ── */}
       <footer className="bg-[#0A0A0A] border-t border-[#4B1E28] pt-16 pb-8 px-6 text-center">
         {/* Logo */}
         <Link
-          href="/lobby"
+          href="/"
           className="inline-block font-cormorant font-semibold text-2xl tracking-[0.4em] text-[#D4AF37]/80 hover:text-[#D4AF37] transition-colors duration-500 mb-10"
         >
           SHAGHAV

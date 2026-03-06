@@ -17,6 +17,9 @@ const config: Config = {
       fontFamily: {
         cormorant: ["var(--font-cormorant)"],
         montserrat: ["var(--font-montserrat)"],
+        arabic: ["var(--font-el-messiri)"],
+        SHAGHAVArabic: ["var(--font-el-messiri)"],
+        tajawal: ["var(--font-tajawal)"],
       },
     },
   },
