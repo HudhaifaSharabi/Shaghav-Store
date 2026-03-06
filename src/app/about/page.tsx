@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -85,10 +86,12 @@ export default function AboutPage() {
       <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
         {/* Background Image: Flowing Fabric */}
         <div className="absolute inset-0">
-          <img 
+          <Image 
              src="/images/lace_details_1772392328266.png" 
-             className="w-full h-full object-cover scale-[1.05]" 
              alt="Luxury Fabric Background" 
+             fill
+             className="object-cover scale-[1.05]" 
+             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/40 via-[#0A0A0A]/60 to-[#0A0A0A]" />
         </div>
@@ -119,20 +122,22 @@ export default function AboutPage() {
         <div className="w-full md:w-[55%] relative flex justify-end order-1 md:order-2">
           {/* Main Large Image */}
           <div className="w-[85%] aspect-[3/4] rounded-t-[30vw] overflow-hidden group shadow-2xl relative z-10">
-            <img 
+            <Image 
               src="/images/ANALIA_masterpiece_1772392229139.png" 
-              className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
               alt="Luxury Masterpiece" 
+              fill
+              className="object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
             />
             <div className="absolute inset-0 bg-[#4B1E28]/10 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-700" />
           </div>
 
           {/* Overlapping Small Image with Parallax */}
           <div className="vision-parallax absolute -bottom-16 -left-8 w-[55%] aspect-square rounded-t-full border-8 border-[#0A0A0A] overflow-hidden z-20 shadow-[0_30px_60px_rgba(0,0,0,0.8)] group">
-             <img 
+             <Image 
               src="/images/luxury-sleepwear.png" 
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
               alt="Detail Parallax" 
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-1000" 
             />
           </div>
         </div>
@@ -148,11 +153,12 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 items-start">
           {/* Column 1 */}
           <div className="atelier-item group relative">
-            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl">
-              <img 
+            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl relative">
+              <Image 
                 src="/images/couture_one_1772392258498.png" 
-                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
                 alt="Atelier One" 
+                fill
+                className="object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
               />
             </div>
             <div className="mt-8 text-right px-4">
@@ -163,11 +169,12 @@ export default function AboutPage() {
 
           {/* Column 2: Pushed Down */}
           <div className="atelier-item group relative md:mt-32">
-            <div className="aspect-[3/4.5] rounded-t-[18vw] overflow-hidden shadow-2xl">
-              <img 
+            <div className="aspect-[3/4.5] rounded-t-[18vw] overflow-hidden shadow-2xl relative">
+              <Image 
                 src="/images/silk_sleepwear_1772392297928.png" 
-                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
                 alt="Atelier Two" 
+                fill
+                className="object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
               />
             </div>
             <div className="mt-8 text-right px-4">
@@ -178,11 +185,12 @@ export default function AboutPage() {
 
           {/* Column 3 */}
           <div className="atelier-item group relative">
-            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl">
-              <img 
+            <div className="aspect-[3/4] rounded-t-[18vw] overflow-hidden shadow-2xl relative">
+              <Image 
                 src="/images/couture_two_1772392277554.png" 
-                className="w-full h-full object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
                 alt="Atelier Three" 
+                fill
+                className="object-cover transition-transform duration-[2500ms] group-hover:scale-110" 
               />
             </div>
             <div className="mt-8 text-right px-4">

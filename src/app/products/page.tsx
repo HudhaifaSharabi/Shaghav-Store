@@ -4,6 +4,7 @@ import { useRef, useState, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import Link from "next/link";
+import Image from "next/image";
 import { ALL_PRODUCTS, type Category, type Product } from "@/lib/products";
 
 
@@ -27,10 +28,12 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
         <span className="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#D4AF37]/30 z-10 pointer-events-none" />
         <span className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-[#D4AF37]/30 z-10 pointer-events-none" />
 
-        <img
+        <Image
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+          fill
+          className="object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+          sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
 
         {/* Dark gradient overlay on hover */}

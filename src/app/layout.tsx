@@ -6,24 +6,28 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-cormorant",
+  display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
   variable: "--font-montserrat",
+  display: "swap",
 });
 
 const elMessiri = El_Messiri({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-el-messiri",
+  display: "swap",
 });
 
 const amiri = Amiri({
   subsets: ["arabic", "latin"],
   weight: ["400", "700"],
   variable: "--font-amiri",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

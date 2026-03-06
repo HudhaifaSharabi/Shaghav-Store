@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, ChevronRight, ChevronLeft, ArrowLeft } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -123,10 +124,12 @@ export default function CollectionPage() {
             {currentItems.map((product) => (
               <Link key={product.id} href={`/products/${product.id}`} className="product-card-reveal group block">
                 <div className="relative aspect-[3/4.2] rounded-t-[20vw] md:rounded-t-[8vw] overflow-hidden bg-[#111] shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
-                  <img 
+                  <Image 
                     src={product.image} 
                     alt={product.title} 
-                    className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
+                    fill
+                    className="object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                   

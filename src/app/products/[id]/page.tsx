@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, Gift, Shield, Truck } from "lucide-react";
 import { ALL_PRODUCTS, getProductById } from "@/lib/products";
 import { useAppStore } from "@/store/useAppStore";
@@ -228,7 +229,12 @@ function ReviewsSection() {
             {/* Customer photo if available */}
             {review.image && (
               <div className="relative aspect-[16/7] overflow-hidden">
-                <img src={review.image} alt="صورة العميلة" className="w-full h-full object-cover" />
+                <Image 
+                  src={review.image} 
+                  alt="صورة العميلة" 
+                  fill
+                  className="object-cover" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <span className="absolute bottom-3 right-4 font-arabic text-[9px] tracking-[0.2em] text-white/50">
                   صورة العميلة بعد الاستلام
@@ -462,14 +468,18 @@ export default function ProductDetailPage() {
             <div className="absolute -bottom-5 -right-5 w-full h-full bg-[#4B1E28]/45 z-[-1]" />
             <div className="absolute -top-5 -left-5 w-full h-full bg-[#3A1520]/30 z-[-2]" />
             <div className="w-full h-full overflow-hidden">
-              <img
+              <Image
+                id="main-product-image"
                 src={activeImage}
                 alt={product.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
                 style={{
                   opacity: imgVisible ? 1 : 0,
                   transition: "opacity 0.22s ease-in-out",
                 }}
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
@@ -486,7 +496,12 @@ export default function ProductDetailPage() {
                     : "opacity-40 hover:opacity-70"
                 }`}
               >
-                <img src={src} alt={`thumb ${i + 1}`} className="w-full h-full object-cover" />
+                <Image 
+                  src={src} 
+                  alt={`thumb ${i + 1}`} 
+                  fill
+                  className="object-cover" 
+                />
               </button>
             ))}
           </div>
@@ -704,10 +719,12 @@ export default function ProductDetailPage() {
               <div className="relative aspect-[3/4] overflow-hidden bg-white/[0.03]">
                 <span className="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#D4AF37]/30 z-10 pointer-events-none" />
                 <span className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-[#D4AF37]/30 z-10 pointer-events-none" />
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+                  fill
+                  className="object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <span className="absolute top-4 left-4 font-cormorant text-[10px] text-white/20 tracking-[0.3em] group-hover:text-[#D4AF37]/50 transition-colors duration-500">
