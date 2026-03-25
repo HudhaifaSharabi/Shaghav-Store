@@ -41,6 +41,7 @@ export const metadata: Metadata = {
 
 import Header from "@/components/layout/Header";
 import ScrollToTop from "@/components/ScrollToTop";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -48,11 +49,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cormorant.variable} ${montserrat.variable} ${elMessiri.variable} ${amiri.variable}`}>
-       <body className="antialiased font-arabic bg-black text-[#F5F5F5]">
-        <ScrollToTop />
-        <Header />
-        {children}
+     <html lang="ar" dir="rtl" className={`${cormorant.variable} ${montserrat.variable} ${elMessiri.variable} ${amiri.variable}`} suppressHydrationWarning>
+       <body className="bg-ANALIA-light-bg text-ANALIA-light-text dark:bg-ANALIA-dark-bg dark:text-ANALIA-dark-text transition-colors duration-700 ease-in-out antialiased">
+        <ThemeProvider>
+          <ScrollToTop />
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

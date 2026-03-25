@@ -56,7 +56,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       <div
         ref={backdropRef}
         onClick={onClose}
-        className="fixed inset-0 bg-[#0A0A0A]/80 backdrop-blur-sm z-[60]"
+        className="fixed inset-0 bg-[#2B2325]/80 dark:bg-[#0A0A0A]/80 backdrop-blur-sm z-[60]"
         style={{ display: "none" }}
       />
 
@@ -64,7 +64,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
       <div
         ref={drawerRef}
         dir="rtl"
-        className="fixed top-0 right-0 h-full w-[90vw] md:w-[420px] bg-[#0A0A0A] border-l border-[#D4AF37]/20 z-[70] flex flex-col shadow-[-20px_0_60px_rgba(0,0,0,0.6)]"
+        className="fixed top-0 right-0 h-full w-[90vw] md:w-[420px] bg-ANALIA-light-bg dark:bg-ANALIA-dark-bg border-l border-ANALIA-gold/20 z-[70] flex flex-col shadow-[-20px_0_60px_rgba(0,0,0,0.6)]"
         style={{ display: "none", transform: "translateX(100%)" }}
       >
         {/* Top glow */}
@@ -205,7 +205,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
         {/* ─── FOOTER ─── */}
         {cart.length > 0 && (
-          <div className="relative z-10 mt-auto border-t border-[#4B1E28]/60 p-6 bg-[#0A0A0A]">
+          <div className="relative z-10 mt-auto border-t border-ANALIA-burgundy/60 p-6 bg-ANALIA-light-bg dark:bg-ANALIA-dark-bg">
             <div className="flex items-center justify-between mb-2">
               <span className="font-arabic text-[10px] tracking-[0.15em] text-white/20">شامل الضريبة</span>
               <div className="flex items-center gap-3">

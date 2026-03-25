@@ -20,12 +20,12 @@ export const ALL_PRODUCTS: Product[] = [
   {
     id: 1,
     title: "سُلطة المُخمل",
-    subtitle: "قطعة يتيمة · ١ من ١",
+    subtitle: "قطعة يتيمة · 1 من 1",
     description:
       "قطعة مصممة بعناية عشان تبرز جمالك. قماش مخملي فاخر ناعم على البشرة يخليك واثقة من نفسك في كل خطوة. صُممت لتُلبس مرة واحدة فقط، لأنك وحدك تستاهلينها.",
-    price: "٨,٩٠٠ ر.س",
+    price: "8,900 ر.س",
     priceNum: 8900,
-    oldPrice: "١٢,٠٠٠ ر.س",
+    oldPrice: "12,000 ر.س",
     image: "/images/ANALIA_masterpiece_1772392229139.png",
     category: "1-of-1",
     isOneOfOne: true,
@@ -47,9 +47,9 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "فستان سهرة راقٍ",
     description:
       "تصميم إطلالة لا تُنسى. قماش ناعم يتدفق مع كل حركة، وتفاصيل دقيقة تجعلكِ محور الاهتمام في أي مناسبة. لأن كل مناسبة تستحق إطلالة أسطورية.",
-    price: "٤,٥٠٠ ر.س",
+    price: "4,500 ر.س",
     priceNum: 4500,
-    oldPrice: "٦,٥٠٠ ر.س",
+    oldPrice: "6,500 ر.س",
     image: "/images/couture_one_1772392258498.png",
     category: "dresses",
     colors: [
@@ -69,9 +69,9 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "بيجامة حرير فاخرة",
     description:
       "لأن لحظات الراحة تستاهل الفخامة. حرير ناعم يلمس بشرتك بلطف في كل ليلة، مع تصميم أنيق يخليك تحسي بالرفاهية حتى في خلوتك.",
-    price: "١,٨٠٠ ر.س",
+    price: "1,800 ر.س",
     priceNum: 1800,
-    oldPrice: "٢,٥٠٠ ر.س",
+    oldPrice: "2,500 ر.س",
     image: "/images/silk_sleepwear_1772392297928.png",
     category: "sleepwear",
     colors: [
@@ -90,9 +90,9 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "فستان كوتور راقٍ",
     description:
       "قطعة تعبّر عن رقتك وأنوثتك. تفاصيل مصنوعة باحتراف وقماش فاخر يجعلكِ تشعرين بالفرق من اللحظة الأولى. صُممت لأجمل لحظاتك.",
-    price: "٣,٢٠٠ ر.س",
+    price: "3,200 ر.س",
     priceNum: 3200,
-    oldPrice: "٤,٥٠٠ ر.س",
+    oldPrice: "4,500 ر.س",
     image: "/images/couture_two_1772392277554.png",
     category: "dresses",
     colors: [
@@ -111,7 +111,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "طقم دانتيل ناعم",
     description:
       "دانتيل فرنسي ناعم ورقيق يحتضن جمالكِ بأناقة. تفاصيل مطرّزة بعناية تعكس ذوقكِ الرفيع في أخص لحظاتكِ.",
-    price: "٩٥٠ ر.س",
+    price: "950 ر.س",
     priceNum: 950,
     image: "/images/lace_details_1772392328266.png",
     category: "lingerie",
@@ -122,7 +122,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "قميص نوم ساتان",
     description:
       "ساتان فاخر بلمسة ملكية. يمنحكِ الراحة والأناقة معاً في ليالٍ هادئة ومميزة. تصميم كلاسيكي لا يخرج من الموضة.",
-    price: "١,٢٠٠ ر.س",
+    price: "1,200 ر.س",
     priceNum: 1200,
     image: "/images/sleepwear_4_1772393732906.png",
     category: "sleepwear",
@@ -130,10 +130,10 @@ export const ALL_PRODUCTS: Product[] = [
   {
     id: 7,
     title: "سرداب الأناقة",
-    subtitle: "قطعة يتيمة · ١ من ١",
+    subtitle: "قطعة يتيمة · 1 من 1",
     description:
       "قطعة مفصّلة باحتراف لا يُمكن تكرارها. كل خيط يحكي قصة عناية واهتمام بالتفاصيل. إذا كنتِ تبحثين عن قطعة تتفرد بها، هذه هي.",
-    price: "١٢,٠٠٠ ر.س",
+    price: "12,000 ر.س",
     priceNum: 12000,
     image: "/images/sleepwear_5_1772393869461.png",
     category: "1-of-1",
@@ -145,7 +145,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "بيجامة كتان مريحة",
     description:
       "كتان طبيعي ناعم يسمح لبشرتك بالتنفس. تصميم فضفاض مريح يمنحكِ الراحة التامة في أوقات الاسترخاء.",
-    price: "٩٨٠ ر.س",
+    price: "980 ر.س",
     priceNum: 980,
     image: "/images/sleepwear_6_1772394511509.png",
     category: "sleepwear",
@@ -156,7 +156,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "طقم لانجري فاخر",
     description:
       "مصمم ليبرز جمالكِ ببراعة. أقمشة فاخرة وتفاصيل راقية تجعلكِ تشعرين بالقوة والأنوثة معاً.",
-    price: "١,١٠٠ ر.س",
+    price: "1,100 ر.س",
     priceNum: 1100,
     image: "/images/sleepwear_7_1772394528628.png",
     category: "lingerie",
@@ -167,7 +167,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "فستان مخملي راقٍ",
     description:
       "مخمل فاخر يعانق جسمكِ بأناقة تامة. تصميم كلاسيكي مع لمسات عصرية تجعلكِ مميزة في كل مكان تدخلينه.",
-    price: "٥,٨٠٠ ر.س",
+    price: "5,800 ر.س",
     priceNum: 5800,
     image: "/images/sleepwear_8_1772394548987.png",
     category: "dresses",
@@ -178,7 +178,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "روب ناعم فضفاض",
     description:
       "خفيف كالغيمة وناعم كالحرير. يلفّكِ بدفء ورفاهية في أوقات الاسترخاء، مع تصميم أنيق لا يُخجل من ارتدائه.",
-    price: "٧٥٠ ر.س",
+    price: "750 ر.س",
     priceNum: 750,
     image: "/images/sleepwear_3_1772393561702.png",
     category: "sleepwear",
@@ -189,7 +189,7 @@ export const ALL_PRODUCTS: Product[] = [
     subtitle: "طقم دانتيل رومانسي",
     description:
       "زهور الدانتيل تحكي قصة أنوثة هادئة وواثقة. قطعة مصنوعة باهتمام بالغ بالتفاصيل لأجمل لحظاتكِ الخاصة.",
-    price: "١,٣٥٠ ر.س",
+    price: "1,350 ر.س",
     priceNum: 1350,
     image: "/images/lace_details_1772392328266.png",
     category: "lingerie",

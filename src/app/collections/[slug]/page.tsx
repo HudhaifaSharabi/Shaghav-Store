@@ -76,11 +76,11 @@ export default function CollectionPage() {
   }, { scope: containerRef, dependencies: [currentItems] });
 
   return (
-    <main ref={containerRef} className="bg-[#0A0A0A] min-h-screen pt-[120px]" dir="rtl">
+    <main ref={containerRef} className="bg-ANALIA-light-bg dark:bg-ANALIA-dark-bg min-h-screen pt-[120px] transition-colors duration-700" dir="rtl">
       
       {/* ── Hero Section ── */}
-      <section className="h-[40vh] md:h-[50vh] flex flex-col items-center justify-center text-center relative bg-gradient-to-b from-[#0A0A0A] to-[#4B1E28]/20 px-6">
-        <h1 className="font-arabic text-4xl md:text-7xl text-[#D4AF37] font-normal drop-shadow-2xl mb-6">
+      <section className="h-[40vh] md:h-[50vh] flex flex-col items-center justify-center text-center relative bg-gradient-to-b from-ANALIA-light-bg dark:from-ANALIA-dark-bg to-ANALIA-burgundy/5 dark:to-ANALIA-burgundy/20 px-6">
+        <h1 className="font-arabic text-4xl md:text-7xl text-ANALIA-light-heading dark:text-[#D4AF37] font-normal drop-shadow-2xl mb-6">
           {categoryInfo.title}
         </h1>
         <p className="font-arabic text-[#C87D8A] text-base md:text-xl max-w-2xl leading-relaxed opacity-80">
@@ -89,7 +89,7 @@ export default function CollectionPage() {
       </section>
 
       {/* ── Utility Bar ── */}
-      <div className="w-full px-6 md:px-[10vw] py-8 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-[#4B1E28]/30 sticky top-[120px] bg-[#0A0A0A]/95 backdrop-blur-md z-40">
+      <div className="w-full px-6 md:px-[10vw] py-8 flex flex-col md:flex-row justify-between items-center gap-6 border-b border-ANALIA-burgundy/10 dark:border-ANALIA-burgundy/30 sticky top-[120px] bg-ANALIA-light-bg/95 dark:bg-ANALIA-dark-bg/95 backdrop-blur-md z-40">
         {/* Search */}
         <div className="relative w-full md:w-80 group">
           <Search className="absolute right-0 top-1/2 -translate-y-1/2 text-[#D4AF37]/50 group-focus-within:text-[#D4AF37] transition-colors w-4 h-4" />
@@ -98,7 +98,7 @@ export default function CollectionPage() {
             placeholder="ابحثي في هذه المجموعة..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-transparent border-b border-[#4B1E28] focus:border-[#D4AF37] text-white text-sm py-2 pr-8 outline-none w-full transition-all font-arabic placeholder:text-white/20"
+            className="bg-transparent border-b border-ANALIA-burgundy/20 dark:border-ANALIA-burgundy focus:border-[#D4AF37] text-ANALIA-light-text dark:text-white text-sm py-2 pr-8 outline-none w-full transition-all font-arabic placeholder:text-ANALIA-light-text/30 dark:placeholder:text-white/20"
           />
         </div>
 
@@ -110,20 +110,20 @@ export default function CollectionPage() {
             onChange={(e) => setSortOption(e.target.value)}
             className="bg-transparent text-[#C87D8A] hover:text-[#D4AF37] text-sm focus:outline-none cursor-pointer font-arabic transition-colors"
           >
-            <option className="bg-[#111]" value="newest">الأحدث</option>
-            <option className="bg-[#111]" value="price-asc">الأقل سعراً</option>
-            <option className="bg-[#111]" value="price-desc">الأعلى سعراً</option>
+            <option className="bg-ANALIA-light-bg dark:bg-[#111]" value="newest">الأحدث</option>
+            <option className="bg-ANALIA-light-bg dark:bg-[#111]" value="price-asc">الأقل سعراً</option>
+            <option className="bg-ANALIA-light-bg dark:bg-[#111]" value="price-desc">الأعلى سعراً</option>
           </select>
         </div>
       </div>
 
       {/* ── Product Grid ── */}
-      <section className="product-grid px-6 md:px-[10vw] py-20 bg-[#0A0A0A]">
+      <section className="product-grid px-6 md:px-[10vw] py-20 bg-transparent">
         {currentItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-20 gap-x-12">
             {currentItems.map((product) => (
               <Link key={product.id} href={`/products/${product.id}`} className="product-card-reveal group block">
-                <div className="relative aspect-[3/4.2] rounded-t-[20vw] md:rounded-t-[8vw] overflow-hidden bg-[#111] shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)]">
+                <div className="relative aspect-[3/4.2] rounded-t-[20vw] md:rounded-t-[8vw] overflow-hidden bg-ANALIA-burgundy/5 dark:bg-[#111] shadow-2xl transition-all duration-700 group-hover:shadow-[0_0_50px_rgba(75,30,40,0.3)] border border-ANALIA-gold/10">
                   <Image 
                     src={product.image} 
                     alt={product.title} 
@@ -131,7 +131,7 @@ export default function CollectionPage() {
                     className="object-cover transition-transform duration-[2000ms] group-hover:scale-110" 
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 dark:from-black/80 via-transparent to-transparent opacity-60" />
                   
                   {/* Quick Add Overlay (Subtle) */}
                   <div className="absolute bottom-0 inset-x-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-black/40 backdrop-blur-sm border-t border-white/10 flex justify-center">
@@ -140,12 +140,12 @@ export default function CollectionPage() {
                 </div>
                 
                 <div className="mt-8 text-center md:text-right px-2">
-                  <h3 className="font-arabic text-[#D4AF37] text-xl md:text-2xl font-normal group-hover:tracking-wider transition-all duration-500">
+                  <h3 className="font-arabic text-ANALIA-light-heading dark:text-[#D4AF37] text-xl md:text-2xl font-normal group-hover:tracking-wider transition-all duration-500">
                     {product.title}
                   </h3>
                   <div className="flex items-center justify-center md:justify-start gap-4 mt-3">
-                    <div className="h-px w-8 bg-[#4B1E28]/40" />
-                    <span className="font-arabic text-white/50 text-sm tracking-widest">{product.price}</span>
+                    <div className="h-px w-8 bg-ANALIA-burgundy/20 dark:bg-[#4B1E28]/40" />
+                    <span className="font-arabic text-ANALIA-light-text/70 dark:text-white/50 text-sm tracking-widest">{product.price}</span>
                   </div>
                 </div>
               </Link>
@@ -164,7 +164,7 @@ export default function CollectionPage() {
           <button 
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(p => p - 1)}
-            className={`p-2 transition-colors ${currentPage === 1 ? 'text-white/10' : 'text-[#D4AF37] hover:text-white'}`}
+            className={`p-2 transition-colors ${currentPage === 1 ? 'text-ANALIA-light-text/20 dark:text-white/10' : 'text-ANALIA-burgundy dark:text-[#D4AF37] hover:text-ANALIA-gold dark:hover:text-white'}`}
           >
             <ChevronRight size={24} />
           </button>
@@ -176,8 +176,8 @@ export default function CollectionPage() {
                 onClick={() => setCurrentPage(i + 1)}
                 className={`font-montserrat text-sm transition-all pb-1 border-b ${
                   currentPage === i + 1 
-                    ? 'text-[#D4AF37] border-[#D4AF37]' 
-                    : 'text-[#C87D8A]/40 border-transparent hover:text-white'
+                    ? 'text-ANALIA-burgundy border-ANALIA-burgundy dark:text-[#D4AF37] dark:border-[#D4AF37]' 
+                    : 'text-[#C87D8A]/60 dark:text-[#C87D8A]/40 border-transparent hover:text-ANALIA-light-heading dark:hover:text-white'
                 }`}
               >
                 {i + 1}
@@ -188,7 +188,7 @@ export default function CollectionPage() {
           <button 
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage(p => p + 1)}
-            className={`p-2 transition-colors ${currentPage === totalPages ? 'text-white/10' : 'text-[#D4AF37] hover:text-white'}`}
+            className={`p-2 transition-colors ${currentPage === totalPages ? 'text-ANALIA-light-text/20 dark:text-white/10' : 'text-ANALIA-burgundy dark:text-[#D4AF37] hover:text-ANALIA-gold dark:hover:text-white'}`}
           >
             <ChevronLeft size={24} />
           </button>

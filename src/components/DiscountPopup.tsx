@@ -78,12 +78,12 @@ export default function DiscountPopup() {
   return (
     <div 
       ref={overlayRef}
-      className="fixed inset-0 bg-[#0A0A0A]/95 backdrop-blur-xl z-[200] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 bg-[#2B2325]/95 dark:bg-[#0A0A0A]/95 backdrop-blur-xl z-[200] flex items-center justify-center p-4 md:p-8"
       dir="rtl"
     >
       <div 
         ref={containerRef}
-        className="bg-[#0A0A0A] border border-[#D4AF37]/30 w-full max-w-4xl h-auto md:min-h-[500px] flex flex-col md:flex-row-reverse items-stretch overflow-hidden relative shadow-[0_0_80px_rgba(75,30,40,0.4)] rounded-sm"
+        className="bg-ANALIA-light-bg dark:bg-ANALIA-dark-bg border border-ANALIA-gold/30 w-full max-w-4xl h-auto md:min-h-[500px] flex flex-col md:flex-row-reverse items-stretch overflow-hidden relative shadow-[0_0_80px_rgba(75,30,40,0.4)] rounded-sm"
       >
         {/* Close Button */}
         <button 
@@ -100,7 +100,7 @@ export default function DiscountPopup() {
             className="absolute inset-0 w-full h-full object-cover scale-105" 
             alt="Luxury Discount" 
           />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#4B1E28]/20 to-[#0A0A0A]/60" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-ANALIA-burgundy/20 to-ANALIA-light-bg/60 dark:to-ANALIA-dark-bg/60" />
           <div className="absolute inset-0 bg-[#4B1E28]/10 mix-blend-overlay" />
         </div>
 
@@ -128,9 +128,9 @@ export default function DiscountPopup() {
                       onKeyDown: handleKeyDown
                     }}
                     containerClass="luxury-phone-input"
-                    inputClass="!w-full !bg-transparent !border-b !border-t-0 !border-l-0 !border-r-0 !border-[#4B1E28] !text-[#F5F5F5] !h-14 !text-lg !pr-16 !pl-4 !rounded-none focus:!border-[#D4AF37] transition-all"
+                    inputClass="!w-full !bg-transparent !border-b !border-t-0 !border-l-0 !border-r-0 !border-ANALIA-burgundy !text-ANALIA-light-text dark:!text-ANALIA-dark-text !h-14 !text-lg !pr-16 !pl-4 !rounded-none focus:!border-ANALIA-gold transition-all"
                     buttonClass="!bg-transparent !border-none !rounded-none"
-                    dropdownClass="!bg-[#111] !text-white !border-[#4B1E28]"
+                    dropdownClass="!bg-ANALIA-light-bg dark:!bg-ANALIA-dark-bg !text-ANALIA-light-text dark:!text-ANALIA-dark-text !border-ANALIA-burgundy"
                     placeholder="رقم الهاتف"
                   />
                   {error && <p className="text-red-500 text-xs mt-2 pr-1">{error}</p>}
